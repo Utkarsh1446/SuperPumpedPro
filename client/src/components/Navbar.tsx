@@ -108,11 +108,12 @@ export default function Navbar() {
 
         {/* Mega Menu */}
         <div
-          className="absolute left-0 right-0 bg-white overflow-hidden transition-all duration-300"
+          className="absolute left-0 right-0 bg-white transition-all duration-300"
           style={{
             top: "64px",
             borderTop: megaMenuOpen ? "1px solid var(--tm-gray-border)" : "none",
-            maxHeight: megaMenuOpen ? "300px" : "0",
+            overflow: megaMenuOpen ? "visible" : "hidden",
+            maxHeight: megaMenuOpen ? "600px" : "0",
             opacity: megaMenuOpen ? 1 : 0,
             boxShadow: megaMenuOpen ? "0 8px 24px rgba(0,0,0,0.06)" : "none",
           }}
