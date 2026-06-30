@@ -70,13 +70,8 @@ export default function Navbar() {
 
           {/* Right side */}
           <div className="hidden lg:flex items-center gap-5">
-            <div className="flex items-center gap-2" style={{ fontSize: "0.75rem", letterSpacing: "0.05em" }}>
-              <a href="#" style={{ color: "var(--tm-black)", fontWeight: 600 }}>EN</a>
-              <span style={{ color: "var(--tm-gray-mid)" }}>|</span>
-              <a href="#" style={{ color: "var(--tm-gray-mid)", fontWeight: 400 }}>ES</a>
-            </div>
             <a
-              href="#"
+              href="https://private.superpumped.pro"
               className="transition-all duration-200 hover:bg-black hover:text-white"
               style={{
                 color: "var(--tm-black)",
@@ -87,7 +82,7 @@ export default function Navbar() {
                 letterSpacing: "0.04em",
               }}
             >
-              Investors Portal
+              Launch App
             </a>
           </div>
 
@@ -167,11 +162,11 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="#"
+            href="https://private.superpumped.pro"
             className="mt-6 text-sm font-medium border text-center py-3"
             style={{ color: "var(--tm-black)", borderColor: "var(--tm-black)" }}
           >
-            Investors Portal
+            Launch App
           </a>
         </nav>
       </div>
