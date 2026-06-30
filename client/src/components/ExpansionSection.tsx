@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const countries = [
   { name: "Spain", img: "/manus-storage/map_spain_25a014a1.jpg" },
@@ -21,36 +21,40 @@ const countries = [
 
 export default function ExpansionSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [activeCountry, setActiveCountry] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef({ position: 0, velocity: 0 });
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll(".fade-up, .fade-in").forEach((el, i) => {
-              setTimeout(() => el.classList.add("visible"), i * 100);
-            });
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+    const carousel = carouselRef.current;
+    if (!carousel) return;
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveCountry((prev) => (prev + 1) % countries.length);
-    }, 2800);
-    return () => clearInterval(timer);
+    let animationId: number;
+    const speed = 0.5; // pixels per frame
+
+    const animate = () => {
+      scrollRef.current.position += speed;
+      
+      // Get the total width of one full set of cards
+      const cardWidth = 240; // approximate card width
+      const totalWidth = cardWidth * countries.length;
+      
+      // Reset to beginning when we've scrolled past one full set
+      if (scrollRef.current.position > totalWidth) {
+        scrollRef.current.position = 0;
+      }
+
+      carousel.style.transform = `translateX(-${scrollRef.current.position}px)`;
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animationId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationId);
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      style={{ background: "#f8f8f6", padding: "8rem 0", overflow: "hidden" }}
+      style={{ background: "#ffffff", padding: "8rem 0 6rem" }}
     >
       <div style={{ padding: "0 2.5rem", maxWidth: "1440px", margin: "0 auto" }}>
         {/* Label */}
@@ -61,13 +65,14 @@ export default function ExpansionSection() {
           Our expansion
         </div>
 
-        {/* Two-column layout */}
+        {/* Two-column layout: text left, carousel right */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)",
+            gridTemplateColumns: "1fr 1fr",
             gap: "5rem",
             alignItems: "start",
+            marginBottom: "4rem",
           }}
         >
           {/* Left: text */}
@@ -153,96 +158,119 @@ export default function ExpansionSection() {
             </div>
           </div>
 
-          {/* Right: Country photo carousel */}
-          <div className="fade-in">
-            {/* Main photo */}
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                aspectRatio: "4/3",
-                overflow: "hidden",
-                background: "#e8e8e6",
-                marginBottom: "1rem",
-              }}
-            >
-              {countries.map((country, i) => (
-                <img
-                  key={country.name}
-                  src={country.img}
-                  alt={country.name}
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    opacity: i === activeCountry ? 1 : 0,
-                    transition: "opacity 0.8s ease",
-                  }}
-                />
-              ))}
-              {/* Country overlay label */}
+          {/* Right: Carousel placeholder (actual carousel below) */}
+          <div className="fade-in" />
+        </div>
+
+        {/* Horizontal infinite carousel */}
+        <div
+          style={{
+            overflow: "hidden",
+            marginBottom: "3rem",
+            background: "#f8f8f6",
+            padding: "2rem 0",
+          }}
+        >
+          <div
+            ref={carouselRef}
+            style={{
+              display: "flex",
+              gap: "1rem",
+              willChange: "transform",
+            }}
+          >
+            {/* Duplicate countries array for seamless loop */}
+            {[...countries, ...countries].map((country, i) => (
               <div
+                key={`${country.name}-${i}`}
                 style={{
-                  position: "absolute",
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  padding: "0.875rem 1.25rem",
-                  background: "rgba(255,255,255,0.92)",
-                  backdropFilter: "blur(4px)",
+                  flexShrink: 0,
+                  width: "240px",
                   display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
+                  flexDirection: "column",
+                  gap: "0.75rem",
                 }}
               >
-                <span style={{ fontSize: "0.875rem", fontWeight: 500, color: "var(--tm-black)" }}>
-                  {countries[activeCountry].name}
-                </span>
-                <span style={{ fontSize: "0.75rem", color: "var(--tm-gray-mid)" }}>
-                  {activeCountry + 1} / {countries.length}
-                </span>
-              </div>
-            </div>
-
-            {/* Thumbnail strip */}
-            <div
-              style={{
-                display: "flex",
-                gap: "0.5rem",
-                overflowX: "auto",
-                scrollbarWidth: "none",
-                paddingBottom: "4px",
-              }}
-            >
-              {countries.map((country, i) => (
-                <button
-                  key={country.name}
-                  onClick={() => setActiveCountry(i)}
-                  title={country.name}
+                <div
                   style={{
-                    flexShrink: 0,
-                    width: "56px",
-                    height: "56px",
+                    width: "100%",
+                    aspectRatio: "1",
                     overflow: "hidden",
-                    opacity: i === activeCountry ? 1 : 0.35,
-                    outline: i === activeCountry ? "2px solid var(--tm-red)" : "none",
-                    outlineOffset: "2px",
-                    transition: "opacity 0.3s ease",
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    padding: 0,
+                    background: "#e8e8e6",
                   }}
                 >
                   <img
                     src={country.img}
                     alt={country.name}
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      display: "block",
+                    }}
                   />
-                </button>
-              ))}
+                </div>
+                <span
+                  style={{
+                    fontSize: "0.8125rem",
+                    fontWeight: 400,
+                    color: "var(--tm-black)",
+                    textAlign: "center",
+                  }}
+                >
+                  {country.name}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Static map with office locations */}
+        <div
+          style={{
+            background: "#f8f8f6",
+            padding: "2rem",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: "300px",
+            position: "relative",
+          }}
+        >
+          <div
+            style={{
+              position: "relative",
+              width: "100%",
+              maxWidth: "600px",
+              aspectRatio: "16/9",
+              background: "#e8e8e6",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "0.875rem",
+              color: "var(--tm-gray-mid)",
+            }}
+          >
+            {/* Simplified Europe map representation */}
+            <div style={{ textAlign: "center" }}>
+              <div style={{ marginBottom: "1rem", fontSize: "0.75rem", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                Europe Map
+              </div>
+              <div style={{ display: "flex", gap: "2rem", justifyContent: "center", alignItems: "center" }}>
+                {/* Office location markers */}
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem" }}>
+                  <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "var(--tm-red)" }} />
+                  <span style={{ fontSize: "0.75rem" }}>Madrid</span>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem" }}>
+                  <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "var(--tm-red)" }} />
+                  <span style={{ fontSize: "0.75rem" }}>London</span>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem" }}>
+                  <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "var(--tm-red)" }} />
+                  <span style={{ fontSize: "0.75rem" }}>Frankfurt</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
