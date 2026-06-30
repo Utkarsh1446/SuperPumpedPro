@@ -76,9 +76,9 @@ export default function HeroSection() {
                 margin: 0,
               }}
             >
-              <span style={{ display: "block", marginLeft: "0" }}>Drive</span>
-              <span style={{ display: "block", marginLeft: "clamp(2.5rem, 5vw, 6rem)" }}>to</span>
-              <span style={{ display: "block", marginLeft: "clamp(5rem, 10vw, 12rem)" }}>grow</span>
+              <span style={{ display: "block", marginLeft: "0" }}>Your edge is</span>
+              <span style={{ display: "block", marginLeft: "clamp(2.5rem, 5vw, 6rem)" }}>bigger than</span>
+              <span style={{ display: "block", marginLeft: "clamp(5rem, 10vw, 12rem)" }}>your position size</span>
             </h1>
           </div>
 
