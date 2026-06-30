@@ -75,7 +75,7 @@ export default function ContactSection() {
           >
             <img
               src="/manus-storage/contact_798aba28.jpg"
-              alt="Tresmares office"
+              alt="SuperPumped office"
               style={{
                 width: "100%",
                 height: "100%",
@@ -142,7 +142,7 @@ export default function ContactSection() {
                   fontWeight: 500,
                 }}
               >
-                TRESMARES
+                SUPERPUMPED
               </span>
             </div>
           </div>

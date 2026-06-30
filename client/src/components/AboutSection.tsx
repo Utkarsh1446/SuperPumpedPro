@@ -40,7 +40,7 @@ export default function AboutSection() {
           className="fade-up tm-label"
           style={{ marginBottom: "3rem", color: "var(--tm-gray-mid)" }}
         >
-          About Tresmares
+          About SuperPumped
         </div>
 
         {/* Two-column layout: heading left, text right */}

@@ -35,7 +35,7 @@ export default function Navbar() {
         >
           {/* Logo */}
           <a href="#" className="flex-shrink-0 flex items-center" style={{ height: "100%" }}>
-            <TresmaresWordmark />
+            <SuperPumpedWordmark />
           </a>
 
           {/* Desktop Nav */}
@@ -179,7 +179,7 @@ export default function Navbar() {
   );
 }
 
-function TresmaresWordmark() {
+function SuperPumpedWordmark() {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
       {/* Icon: three horizontal lines stacked */}
@@ -200,7 +200,7 @@ function TresmaresWordmark() {
           lineHeight: 1,
         }}
       >
-        TRESMARES
+        SUPERPUMPED
       </span>
     </div>
   );

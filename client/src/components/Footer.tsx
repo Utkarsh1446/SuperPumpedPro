@@ -64,7 +64,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href="mailto:info@tresmarescapital.com"
+              href="mailto:info@superpumped.com"
               aria-label="Email"
               className="transition-colors duration-200 hover:text-red-600"
               style={{ color: "var(--tm-black)" }}
@@ -135,7 +135,7 @@ export default function Footer() {
               letterSpacing: "0.03em",
             }}
           >
-            © 2023 Tresmares Capital is registered with the CNMV.
+            © 2023 SuperPumped is registered with the CNMV.
           </p>
           <div
             className="flex items-center gap-3"
