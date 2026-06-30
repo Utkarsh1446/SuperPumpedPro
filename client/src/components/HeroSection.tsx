@@ -24,14 +24,14 @@ export default function HeroSection() {
       className="relative w-full overflow-hidden"
       style={{ minHeight: "100vh", background: "#ffffff" }}
     >
-      {/* Mountain background — grayscale, full bleed */}
+      {/* Stadium background — grayscale, full bleed */}
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: `url(https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=2400&q=80&auto=format&fit=crop)`,
+          backgroundImage: `url(/manus-storage/Stadium_fe070eff.jpg)`,
           backgroundSize: "cover",
-          backgroundPosition: "center 25%",
-          filter: "grayscale(100%) contrast(0.72) brightness(1.3)",
+          backgroundPosition: "center",
+          filter: "grayscale(100%) contrast(1.1) brightness(0.9)",
         }}
       />
 
@@ -40,7 +40,7 @@ export default function HeroSection() {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.75) 72%, rgba(255,255,255,1) 100%)",
+            "linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 20%, rgba(255,255,255,0.2) 40%, rgba(255,255,255,0.6) 65%, rgba(255,255,255,1) 100%)",
         }}
       />
 
