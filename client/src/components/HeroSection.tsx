@@ -1,23 +1,4 @@
-import { useEffect, useRef } from "react";
-
 export default function HeroSection() {
-  const scrollDotRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    let pos = 0;
-    let dir = 1;
-    const animate = () => {
-      pos += dir * 0.4;
-      if (pos > 14) dir = -1;
-      if (pos < 0) dir = 1;
-      if (scrollDotRef.current) {
-        scrollDotRef.current.style.transform = `translateY(${pos}px)`;
-      }
-      requestAnimationFrame(animate);
-    };
-    const raf = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(raf);
-  }, []);
 
   return (
     <section
@@ -139,50 +120,7 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: "2rem",
-            left: "2.5rem",
-            display: "flex",
-            alignItems: "center",
-            gap: "0.75rem",
-          }}
-        >
-          <div
-            style={{
-              position: "relative",
-              width: "1px",
-              height: "36px",
-              background: "rgba(43,43,43,0.2)",
-            }}
-          >
-            <div
-              ref={scrollDotRef}
-              style={{
-                width: "5px",
-                height: "5px",
-                borderRadius: "50%",
-                background: "var(--tm-red)",
-                position: "absolute",
-                left: "-2px",
-                top: "0",
-              }}
-            />
-          </div>
-          <span
-            style={{
-              fontSize: "0.625rem",
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              fontWeight: 500,
-              color: "var(--tm-black)",
-            }}
-          >
-            Scroll
-          </span>
-        </div>
+
       </div>
     </section>
   );
