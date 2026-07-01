@@ -1,15 +1,17 @@
 import { useEffect, useRef } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const stats = [
-  { number: "2026", label: "Foundation Year" },
-  { number: "True", label: "Privacy" },
-  { number: "Upto 10x", label: "Leverage" },
-  { number: "<100ms", label: "Latency" },
-  { number: "+1000", label: "Trades" },
-  { number: "True", label: "Advanced Options" },
+  { enNumber: "2026", esNumber: "2026", en: "Foundation Year", es: "Año de fundación" },
+  { enNumber: "True", esNumber: "Sí", en: "Privacy", es: "Privacidad" },
+  { enNumber: "Up to 10x", esNumber: "Hasta 10x", en: "Leverage", es: "Apalancamiento" },
+  { enNumber: "<100ms", esNumber: "<100ms", en: "Latency", es: "Latencia" },
+  { enNumber: "+1000", esNumber: "+1000", en: "Trades", es: "Operaciones" },
+  { enNumber: "True", esNumber: "Sí", en: "Advanced Options", es: "Opciones avanzadas" },
 ];
 
 export default function AboutSection() {
+  const { language } = useLanguage();
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -40,7 +42,7 @@ export default function AboutSection() {
           className="fade-up tm-label"
           style={{ marginBottom: "3rem", color: "var(--tm-gray-mid)" }}
         >
-          About SuperPumped
+          {language === "es" ? "Acerca de SuperPumped" : "About SuperPumped"}
         </div>
 
         {/* Two-column layout: heading left, text right */}
@@ -64,11 +66,11 @@ export default function AboutSection() {
                 letterSpacing: "-0.02em",
               }}
             >
-              You are not lacking conviction.
-              <br />
-              You are
-              <br />
-              under capitalized.
+              {language === "es" ? (
+                <>No te falta convicción.<br />Te falta<br />capital.</>
+              ) : (
+                <>You are not lacking conviction.<br />You are<br />under capitalized.</>
+              )}
             </h2>
           </div>
 
@@ -89,7 +91,9 @@ export default function AboutSection() {
                 fontWeight: 300,
               }}
             >
-              You've been right. You knew the market was mispriced. You called it before anyone else did and then watched it resolve exactly the way you said it would. The payout was fine. It should have been life-changing. The problem was never your read. It was the size you could afford to put behind it.
+              {language === "es"
+                ? "Tenías razón. Sabías que el mercado estaba mal valorado. Lo anticipaste antes que nadie y después viste cómo se resolvía exactamente como dijiste. El beneficio estuvo bien, pero debería haber cambiado tu vida. El problema nunca fue tu lectura, sino el tamaño de la posición que podías permitirte."
+                : "You've been right. You knew the market was mispriced. You called it before anyone else did and then watched it resolve exactly the way you said it would. The payout was fine. It should have been life-changing. The problem was never your read. It was the size you could afford to put behind it."}
             </p>
           </div>
         </div>
@@ -104,7 +108,7 @@ export default function AboutSection() {
         >
           {stats.map((stat, i) => (
             <div
-              key={stat.number}
+              key={stat.en}
               className="fade-up"
               style={{
                 padding: "2.5rem 0",
@@ -125,7 +129,7 @@ export default function AboutSection() {
                   marginBottom: "0.5rem",
                 }}
               >
-                {stat.number}
+                {language === "es" ? stat.esNumber : stat.enNumber}
               </div>
               <div
                 style={{
@@ -135,7 +139,7 @@ export default function AboutSection() {
                   letterSpacing: "0.02em",
                 }}
               >
-                {stat.label}
+                {language === "es" ? stat.es : stat.en}
               </div>
             </div>
           ))}

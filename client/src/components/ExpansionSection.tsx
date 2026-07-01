@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const socialPosts = [
   {
@@ -39,6 +40,7 @@ const socialPosts = [
 ];
 
 export default function ExpansionSection() {
+  const { language } = useLanguage();
   const sectionRef = useRef<HTMLDivElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
   const scrollPositionRef = useRef(0);
@@ -104,113 +106,24 @@ export default function ExpansionSection() {
   return (
     <section
       ref={sectionRef}
-      style={{ background: "#ffffff", padding: "8rem 0 6rem" }}
+      style={{ background: "#ffffff", padding: "6rem 0" }}
     >
       <div style={{ padding: "0 2.5rem", maxWidth: "1440px", margin: "0 auto" }}>
-        {/* Label */}
-        <div
-          className="fade-up tm-label"
-          style={{ marginBottom: "3rem", color: "var(--tm-gray-mid)" }}
-        >
-          Our expansion
-        </div>
-
-        {/* Two-column layout: text left, carousel right */}
-        <div
+        <h2
+          className="tm-display"
           style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "5rem",
-            alignItems: "start",
-            marginBottom: "4rem",
+            fontSize: "clamp(2rem, 4vw, 3.5rem)",
+            fontWeight: 300,
+            maxWidth: "700px",
+            lineHeight: 1.05,
+            color: "var(--tm-black)",
+            marginBottom: "3rem",
           }}
         >
-          {/* Left: text */}
-          <div className="flex flex-col gap-6">
-            <h2
-              className="fade-up tm-display"
-              style={{
-                fontSize: "clamp(2rem, 3.5vw, 3.5rem)",
-                fontWeight: 300,
-                lineHeight: 1.05,
-                color: "var(--tm-black)",
-                marginBottom: "0.5rem",
-              }}
-            >
-              We join forces with{" "}
-              <strong style={{ fontWeight: 600 }}>Banco Santander</strong> to
-              reach further
-            </h2>
-
-            <p
-              className="fade-up"
-              style={{
-                fontSize: "0.9375rem",
-                lineHeight: 1.7,
-                color: "var(--tm-black)",
-                fontWeight: 300,
-              }}
-            >
-              An independent management company supported by Banco Santander, from which we operate in continental Europe from our offices in Madrid, London, and Frankfurt.
-            </p>
-            <p
-              className="fade-up"
-              style={{
-                fontSize: "0.9375rem",
-                lineHeight: 1.7,
-                color: "var(--tm-black)",
-                fontWeight: 300,
-              }}
-            >
-              Our pan-European reach enables us to identify and execute investment opportunities across the continent, leveraging local expertise and a broad network of relationships.
-            </p>
-
-            {/* Office locations */}
-            <div
-              className="fade-up"
-              style={{
-                borderTop: "1px solid var(--tm-gray-border)",
-                paddingTop: "1.5rem",
-                marginTop: "0.5rem",
-              }}
-            >
-              <div
-                className="tm-label"
-                style={{ marginBottom: "1rem", color: "var(--tm-gray-mid)" }}
-              >
-                Our offices
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "0.625rem" }}>
-                {["Madrid", "London", "Frankfurt"].map((city) => (
-                  <div
-                    key={city}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "0.75rem",
-                      fontSize: "0.9375rem",
-                      fontWeight: 400,
-                    }}
-                  >
-                    <span
-                      style={{
-                        width: "5px",
-                        height: "5px",
-                        borderRadius: "50%",
-                        background: "var(--tm-red)",
-                        flexShrink: 0,
-                      }}
-                    />
-                    {city}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Right: Carousel placeholder (actual carousel below) */}
-          <div className="fade-in" />
-        </div>
+          {language === "es"
+            ? "Lo que dicen usuarios reales sobre la necesidad de apalancamiento"
+            : "What real users say about need of leverage"}
+        </h2>
 
         {/* Social post carousel */}
         <div

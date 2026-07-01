@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const financialSolutions = [
-  { title: "Leverage", img: "/assets/leverage.png", href: "#" },
-  { title: "Earning Vaults", img: "/assets/earning-vaults.png", href: "#" },
-  { title: "Automated Strategies", img: "/assets/automated-strategies.png", href: "#" },
-  { title: "Agentic Markets", img: "/assets/agentic-markets.png", href: "#" },
+  { en: "Leverage", es: "Apalancamiento", img: "/assets/leverage.png", href: "#" },
+  { en: "Earning Vaults", es: "Bóvedas de Rendimiento", img: "/assets/earning-vaults.png", href: "#" },
+  { en: "Automated Strategies", es: "Estrategias Automatizadas", img: "/assets/automated-strategies.png", href: "#" },
+  { en: "Agentic Markets", es: "Mercados Agénticos", img: "/assets/agentic-markets.png", href: "#" },
 ];
 
 export default function Navbar() {
+  const { language } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -40,7 +42,7 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8">
-            {["About"].map((item) => (
+            {[language === "es" ? "Acerca de" : "About"].map((item) => (
               <a
                 key={item}
                 href="#"
@@ -60,13 +62,13 @@ export default function Navbar() {
                 className="flex items-center gap-1.5 transition-opacity duration-200 hover:opacity-60"
                 style={{ color: scrolled ? "var(--tm-black)" : "#ffffff", fontSize: "0.8125rem", fontWeight: 400, letterSpacing: "0.01em", background: "none", border: "none", cursor: "pointer" }}
               >
-                Solutions
+                {language === "es" ? "Soluciones" : "Solutions"}
                 <svg width="9" height="5" viewBox="0 0 9 5" fill="none" className={`transition-transform duration-200 ${megaMenuOpen ? "rotate-180" : ""}`}>
                   <path d="M1 1L4.5 4L8 1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </button>
             </div>
-            {["Docs", "Contact"].map((item) => (
+            {["Docs", language === "es" ? "Contacto" : "Contact"].map((item) => (
               <a
                 key={item}
                 href="#"
@@ -92,7 +94,7 @@ export default function Navbar() {
                 letterSpacing: "0.04em",
               }}
             >
-              Launch App
+              {language === "es" ? "Abrir app" : "Launch App"}
             </a>
           </div>
 
@@ -100,7 +102,7 @@ export default function Navbar() {
           <button
             className="lg:hidden p-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label={language === "es" ? "Abrir menú" : "Toggle menu"}
             style={{ background: "none", border: "none" }}
           >
             <div className="w-5 flex flex-col gap-1.5">
@@ -128,7 +130,7 @@ export default function Navbar() {
           <div style={{ padding: "2rem 2.5rem", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1.5rem" }}>
             {financialSolutions.map((item) => (
               <a
-                key={item.title}
+                key={item.en}
                 href={item.href}
                 className="group flex flex-col gap-3"
                 style={{ textDecoration: "none" }}
@@ -136,12 +138,12 @@ export default function Navbar() {
                 <div style={{ aspectRatio: "16/9", overflow: "hidden", background: "#f0f0ee" }}>
                   <img
                     src={item.img}
-                    alt={item.title}
+                    alt={language === "es" ? item.es : item.en}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
                 <span style={{ fontSize: "0.8125rem", fontWeight: 500, color: "var(--tm-black)" }}>
-                  {item.title}
+                  {language === "es" ? item.es : item.en}
                 </span>
               </a>
             ))}
@@ -160,7 +162,12 @@ export default function Navbar() {
         }}
       >
         <nav className="flex flex-col" style={{ padding: "2rem 2.5rem", gap: "0" }}>
-          {["About", "Solutions", "Docs", "Contact"].map((item) => (
+          {[
+            language === "es" ? "Acerca de" : "About",
+            language === "es" ? "Soluciones" : "Solutions",
+            "Docs",
+            language === "es" ? "Contacto" : "Contact",
+          ].map((item) => (
             <a
               key={item}
               href="#"
@@ -176,7 +183,7 @@ export default function Navbar() {
             className="mt-6 text-sm font-medium border text-center py-3"
             style={{ color: "var(--tm-black)", borderColor: "var(--tm-black)" }}
           >
-            Launch App
+            {language === "es" ? "Abrir app" : "Launch App"}
           </a>
         </nav>
       </div>

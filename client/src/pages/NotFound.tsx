@@ -2,8 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle, Home } from "lucide-react";
 import { useLocation } from "wouter";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function NotFound() {
+  const { language } = useLanguage();
   const [, setLocation] = useLocation();
 
   const handleGoHome = () => {
@@ -24,13 +26,15 @@ export default function NotFound() {
           <h1 className="text-4xl font-bold text-slate-900 mb-2">404</h1>
 
           <h2 className="text-xl font-semibold text-slate-700 mb-4">
-            Page Not Found
+            {language === "es" ? "Página no encontrada" : "Page Not Found"}
           </h2>
 
           <p className="text-slate-600 mb-8 leading-relaxed">
-            Sorry, the page you are looking for doesn't exist.
-            <br />
-            It may have been moved or deleted.
+            {language === "es" ? (
+              <>La página que buscas no existe.<br />Puede haber sido movida o eliminada.</>
+            ) : (
+              <>Sorry, the page you are looking for doesn't exist.<br />It may have been moved or deleted.</>
+            )}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -39,7 +43,7 @@ export default function NotFound() {
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
             >
               <Home className="w-4 h-4 mr-2" />
-              Go Home
+              {language === "es" ? "Volver al inicio" : "Go Home"}
             </Button>
           </div>
         </CardContent>

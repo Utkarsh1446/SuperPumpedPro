@@ -1,57 +1,63 @@
 import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const solutions = [
   {
     id: "leverage",
-    title: "Leverage",
-    description:
-      "Minority stakes in SMEs, with the aim of becoming strategic capital to support professionalization and accelerate growth.",
+    enTitle: "Leverage",
+    esTitle: "Apalancamiento",
+    enDescription: "Amplify high-conviction prediction-market positions with up to 10x leverage through isolated execution, so every trade has its own defined risk boundary.",
+    esDescription: "Amplifica posiciones de alta convicción en mercados de predicción con hasta 10x de apalancamiento mediante ejecución aislada, para que cada operación tenga su propio límite de riesgo.",
     stats: [
-      { label: "AuMs", value: "€550m+" },
-      { label: "EBITDA", value: "€1m ⟷ €25m" },
-      { label: "Ticket", value: "€5m ⟷ €35m" },
+      { en: "Maximum", es: "Máximo", enValue: "10x", esValue: "10x" },
+      { en: "Execution", es: "Ejecución", enValue: "Isolated", esValue: "Aislada" },
+      { en: "Markets", es: "Mercados", enValue: "Prediction", esValue: "Predicción" },
     ],
     img: "/assets/leverage.png",
   },
   {
     id: "earning-vaults",
-    title: "Earning\nVaults",
-    description:
-      "Tailored financing that can combine amortizable tranches (TLA) and non-amortizable tranches to maturity / bullet (TLB) to finance different uses (acquisitions, capex, M&A, dividends, etc.)",
+    enTitle: "Earning\nVaults",
+    esTitle: "Bóvedas de\nRendimiento",
+    enDescription: "Put idle capital to work in structured vaults designed to support leveraged prediction-market liquidity while keeping strategies and risk pools clearly separated.",
+    esDescription: "Pon el capital inactivo a trabajar en bóvedas estructuradas que respaldan la liquidez apalancada de mercados de predicción, manteniendo estrategias y riesgos claramente separados.",
     stats: [
-      { label: "AuMs", value: "€2.3bn+" },
-      { label: "EBITDA", value: "€2m ⟷ €25m" },
-      { label: "Ticket", value: "€5m ⟷ €75m" },
+      { en: "Yield", es: "Rendimiento", enValue: "Automated", esValue: "Automatizado" },
+      { en: "Access", es: "Acceso", enValue: "On-demand", esValue: "Bajo demanda" },
+      { en: "Risk", es: "Riesgo", enValue: "Vault-isolated", esValue: "Aislado" },
     ],
     img: "/assets/earning-vaults.png",
   },
   {
     id: "automated-strategies",
-    title: "Automated\nStrategies",
-    description:
-      "We invest in leading Buyout and Growth strategies through a selective portfolio of private equity funds, focusing on supporting experienced strategies and managers with consistent top-quartile performance.",
+    enTitle: "Automated\nStrategies",
+    esTitle: "Estrategias\nAutomatizadas",
+    enDescription: "Deploy rules-based strategies that monitor markets, size opportunities, and execute around the clock—without surrendering ownership of your models or trading logic.",
+    esDescription: "Despliega estrategias basadas en reglas que supervisan mercados, dimensionan oportunidades y ejecutan sin descanso, sin ceder la propiedad de tus modelos ni de tu lógica de trading.",
     stats: [
-      { label: "AuMs", value: "€600m" },
-      { label: "Target Segment", value: "Retail" },
-      { label: "Strategy", value: "FoF PE & Secondaries" },
+      { en: "Operation", es: "Operación", enValue: "24/7", esValue: "24/7" },
+      { en: "Control", es: "Control", enValue: "Rules-based", esValue: "Por reglas" },
+      { en: "Status", es: "Estado", enValue: "Coming soon", esValue: "Próximamente" },
     ],
     img: "/assets/automated-strategies.png",
   },
   {
     id: "agentic-markets",
-    title: "Agentic\nMarkets",
-    description:
-      "Tailored financing to meet the liquidity needs of private equity managers and provide operational flexibility.",
+    enTitle: "Agentic\nMarkets",
+    esTitle: "Mercados\nAgénticos",
+    enDescription: "Connect Claude, ChatGPT, Kimi, or your own agents to private execution infrastructure built for researching, deciding, and acting across prediction markets at scale.",
+    esDescription: "Conecta Claude, ChatGPT, Kimi o tus propios agentes a una infraestructura de ejecución privada diseñada para investigar, decidir y actuar a escala en mercados de predicción.",
     stats: [
-      { label: "AuMs", value: "€150m" },
-      { label: "Ticket", value: "€5m ⟷ €50m" },
-      { label: "Transactions", value: "+15" },
+      { en: "Agents", es: "Agentes", enValue: "Bring your own", esValue: "Usa los tuyos" },
+      { en: "Data", es: "Datos", enValue: "Private", esValue: "Privados" },
+      { en: "Status", es: "Estado", enValue: "Coming soon", esValue: "Próximamente" },
     ],
     img: "/assets/agentic-markets.png",
   },
 ];
 
 export default function FinancialSolutionsSection() {
+  const { language } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -89,7 +95,7 @@ export default function FinancialSolutionsSection() {
             className="tm-label"
             style={{ marginBottom: "2rem", color: "var(--tm-gray-mid)" }}
           >
-            Solutions
+            {language === "es" ? "Soluciones" : "Solutions"}
           </div>
           <h2
             className="tm-display"
@@ -101,7 +107,9 @@ export default function FinancialSolutionsSection() {
               color: "var(--tm-black)",
             }}
           >
-            Our ecosystem offers one stop solution for all your needs. Curated for Traders by Traders. Let your capital get SuperPumped
+            {language === "es"
+              ? "Nuestro ecosistema ofrece una solución integral para todas tus necesidades. Creado por traders, para traders. Haz que tu capital se SuperPumped."
+              : "Our ecosystem offers one stop solution for all your needs. Curated for Traders by Traders. Let your capital get SuperPumped"}
           </h2>
         </div>
 
@@ -131,7 +139,7 @@ export default function FinancialSolutionsSection() {
                     cursor: "pointer",
                   }}
                 >
-                  {s.title.replace("\n", " ")}
+                  {(language === "es" ? s.esTitle : s.enTitle).replace("\n", " ")}
                 </button>
               ))}
             </div>
@@ -165,7 +173,7 @@ export default function FinancialSolutionsSection() {
                   >
                     <img
                       src={solution.img}
-                      alt={solution.title.replace("\n", " ")}
+                      alt={(language === "es" ? solution.esTitle : solution.enTitle).replace("\n", " ")}
                       style={{ width: "100%", height: "100%", objectFit: "cover" }}
                     />
                   </div>
@@ -182,7 +190,7 @@ export default function FinancialSolutionsSection() {
                         whiteSpace: "pre-line",
                       }}
                     >
-                      {solution.title}
+                      {language === "es" ? solution.esTitle : solution.enTitle}
                     </h3>
                     <p
                       style={{
@@ -193,15 +201,15 @@ export default function FinancialSolutionsSection() {
                         maxWidth: "460px",
                       }}
                     >
-                      {solution.description}
+                      {language === "es" ? solution.esDescription : solution.enDescription}
                     </p>
                     {i < 2 ? (
                       <a href="#" className="tm-link" style={{ width: "fit-content" }}>
-                        Know more
+                        {language === "es" ? "Saber más" : "Know more"}
                       </a>
                     ) : (
                       <span className="tm-link" style={{ width: "fit-content", cursor: "default" }}>
-                        Coming Soon
+                        {language === "es" ? "Próximamente" : "Coming Soon"}
                       </span>
                     )}
                   </div>
@@ -219,7 +227,7 @@ export default function FinancialSolutionsSection() {
                 >
                   {solution.stats.map((stat, si) => (
                     <div
-                      key={stat.label}
+                      key={stat.en}
                       style={{
                         display: "flex",
                         flexDirection: "column",
@@ -238,7 +246,7 @@ export default function FinancialSolutionsSection() {
                           fontWeight: 500,
                         }}
                       >
-                        {stat.label}
+                        {language === "es" ? stat.es : stat.en}
                       </span>
                       <span
                         style={{
@@ -248,7 +256,7 @@ export default function FinancialSolutionsSection() {
                           letterSpacing: "-0.01em",
                         }}
                       >
-                        {stat.value}
+                        {language === "es" ? stat.esValue : stat.enValue}
                       </span>
                     </div>
                   ))}

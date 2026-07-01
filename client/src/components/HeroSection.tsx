@@ -1,4 +1,7 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
 export default function HeroSection() {
+  const { language } = useLanguage();
 
   return (
     <section
@@ -50,9 +53,9 @@ export default function HeroSection() {
                 margin: 0,
               }}
             >
-              <span style={{ display: "block", marginLeft: "0" }}>Your edge is</span>
-              <span style={{ display: "block", marginLeft: "clamp(2.5rem, 5vw, 6rem)" }}>bigger than</span>
-              <span style={{ display: "block", marginLeft: "clamp(5rem, 10vw, 12rem)" }}>your position size</span>
+              <span style={{ display: "block", marginLeft: "0" }}>{language === "es" ? "Tu ventaja es" : "Your edge is"}</span>
+              <span style={{ display: "block", marginLeft: "clamp(2.5rem, 5vw, 6rem)" }}>{language === "es" ? "mayor que" : "bigger than"}</span>
+              <span style={{ display: "block", marginLeft: "clamp(5rem, 10vw, 12rem)" }}>{language === "es" ? "el tamaño de tu posición" : "your position size"}</span>
             </h1>
           </div>
 

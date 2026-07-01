@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function CookieBanner() {
+  const { language } = useLanguage();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -56,7 +58,9 @@ export default function CookieBanner() {
               maxWidth: "800px",
             }}
           >
-            We use our own and third-party cookies to improve our services and show you advertising related to your preferences by analyzing your browsing habits. If you continue browsing, we consider that you accept their use.{" "}
+            {language === "es"
+              ? "Utilizamos cookies propias y de terceros para mejorar nuestros servicios y mostrar publicidad relacionada con tus preferencias mediante el análisis de tus hábitos de navegación. Si continúas navegando, consideramos que aceptas su uso. "
+              : "We use our own and third-party cookies to improve our services and show you advertising related to your preferences by analyzing your browsing habits. If you continue browsing, we consider that you accept their use. "}
             <a
               href="#"
               style={{
@@ -65,7 +69,7 @@ export default function CookieBanner() {
                 fontSize: "0.8125rem",
               }}
             >
-              Cookies Policy
+              {language === "es" ? "Política de cookies" : "Cookies Policy"}
             </a>
           </p>
         </div>
@@ -84,7 +88,7 @@ export default function CookieBanner() {
               cursor: "pointer",
             }}
           >
-            Accept all
+            {language === "es" ? "Aceptar todo" : "Accept all"}
           </button>
           <button
             onClick={reject}
@@ -100,7 +104,7 @@ export default function CookieBanner() {
               cursor: "pointer",
             }}
           >
-            Reject non-essential
+            {language === "es" ? "Rechazar no esenciales" : "Reject non-essential"}
           </button>
           <a
             href="#"
@@ -111,7 +115,7 @@ export default function CookieBanner() {
               letterSpacing: "0.02em",
             }}
           >
-            Manage preferences
+            {language === "es" ? "Gestionar preferencias" : "Manage preferences"}
           </a>
         </div>
       </div>
