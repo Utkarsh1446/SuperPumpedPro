@@ -50,7 +50,7 @@ export default function Navbar() {
                 {item}
               </a>
             ))}
-            {/* Financial Solutions with mega menu */}
+            {/* Solutions with mega menu */}
             <div
               className="relative"
               onMouseEnter={() => setMegaMenuOpen(true)}
@@ -60,7 +60,7 @@ export default function Navbar() {
                 className="flex items-center gap-1.5 transition-opacity duration-200 hover:opacity-60"
                 style={{ color: scrolled ? "var(--tm-black)" : "#ffffff", fontSize: "0.8125rem", fontWeight: 400, letterSpacing: "0.01em", background: "none", border: "none", cursor: "pointer" }}
               >
-                Financial Solutions
+                Solutions
                 <svg width="9" height="5" viewBox="0 0 9 5" fill="none" className={`transition-transform duration-200 ${megaMenuOpen ? "rotate-180" : ""}`}>
                   <path d="M1 1L4.5 4L8 1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -160,7 +160,7 @@ export default function Navbar() {
         }}
       >
         <nav className="flex flex-col" style={{ padding: "2rem 2.5rem", gap: "0" }}>
-          {["About", "Financial Solutions", "Docs", "Contact"].map((item) => (
+          {["About", "Solutions", "Docs", "Contact"].map((item) => (
             <a
               key={item}
               href="#"

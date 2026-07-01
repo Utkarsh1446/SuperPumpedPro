@@ -91,9 +91,6 @@ export default function AboutSection() {
             >
               You've been right. You knew the market was mispriced. You called it before anyone else did and then watched it resolve exactly the way you said it would. The payout was fine. It should have been life-changing. The problem was never your read. It was the size you could afford to put behind it.
             </p>
-            <a href="#" className="tm-link" style={{ width: "fit-content" }}>
-              Discover our history
-            </a>
           </div>
         </div>
 

@@ -36,14 +36,7 @@ export default function HeroSection() {
           padding: "0 2.5rem 4.5rem",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "space-between",
-            gap: "2rem",
-          }}
-        >
+        <div>
           {/* Left: large staggered title */}
           <div>
             <h1
@@ -63,61 +56,6 @@ export default function HeroSection() {
             </h1>
           </div>
 
-          {/* Right: subtitle + link */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "1rem",
-              maxWidth: "260px",
-              paddingBottom: "0.75rem",
-              flexShrink: 0,
-            }}
-          >
-            <p
-              style={{
-                fontSize: "0.9375rem",
-                lineHeight: 1.55,
-                color: "var(--tm-black)",
-                fontWeight: 300,
-                margin: 0,
-              }}
-            >
-              Tailored financing
-              <br />
-              for high-growth SMEs
-              <br />
-              and private equity
-              <br />
-              managers.
-            </p>
-            <a
-              href="#financial-solutions"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.375rem",
-                fontSize: "0.8125rem",
-                fontWeight: 500,
-                color: "var(--tm-black)",
-                borderBottom: "1px solid var(--tm-black)",
-                paddingBottom: "2px",
-                width: "fit-content",
-                textDecoration: "none",
-                transition: "color 0.2s ease, border-color 0.2s ease",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.color = "var(--tm-red)";
-                (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--tm-red)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.color = "var(--tm-black)";
-                (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--tm-black)";
-              }}
-            >
-              Financial Solutions
-            </a>
-          </div>
         </div>
 
 

@@ -89,17 +89,16 @@ export default function FinancialSolutionsSection() {
             className="tm-label"
             style={{ marginBottom: "2rem", color: "var(--tm-gray-mid)" }}
           >
-            Financial solutions
+            Solutions
           </div>
           <h2
             className="tm-display"
             style={{
-              fontSize: "min(1.35vw, 1.2rem)",
+              fontSize: "clamp(2rem, 4vw, 3.5rem)",
               fontWeight: 300,
-              maxWidth: "none",
+              maxWidth: "700px",
               lineHeight: 1.05,
               color: "var(--tm-black)",
-              whiteSpace: "nowrap",
             }}
           >
             Our ecosystem offers one stop solution for all your needs. Curated for Traders by Traders. Let your capital get SuperPumped
@@ -196,9 +195,15 @@ export default function FinancialSolutionsSection() {
                     >
                       {solution.description}
                     </p>
-                    <a href="#" className="tm-link" style={{ width: "fit-content" }}>
-                      Know more
-                    </a>
+                    {i < 2 ? (
+                      <a href="#" className="tm-link" style={{ width: "fit-content" }}>
+                        Know more
+                      </a>
+                    ) : (
+                      <span className="tm-link" style={{ width: "fit-content", cursor: "default" }}>
+                        Coming Soon
+                      </span>
+                    )}
                   </div>
                 </div>
 
