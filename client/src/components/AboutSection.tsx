@@ -1,12 +1,12 @@
 import { useEffect, useRef } from "react";
 
 const stats = [
-  { number: "2014", label: "Foundation year" },
-  { number: "+3.500", label: "Millions of € committed" },
-  { number: "+2.000", label: "Millions of € invested" },
-  { number: "4 - 75", label: "Millions of € invested per company" },
-  { number: "+100", label: "Companies in 5 countries" },
-  { number: "+60", label: "Employees" },
+  { number: "2026", label: "Foundation Year" },
+  { number: "True", label: "Privacy" },
+  { number: "Upto 10x", label: "Leverage" },
+  { number: "<100ms", label: "Latency" },
+  { number: "+1000", label: "Trades" },
+  { number: "True", label: "Advanced Options" },
 ];
 
 export default function AboutSection() {
@@ -64,7 +64,11 @@ export default function AboutSection() {
                 letterSpacing: "-0.02em",
               }}
             >
-              A pan-european alternative investment firm focused on driving SME growth
+              You are not lacking conviction.
+              <br />
+              You are
+              <br />
+              under capitalized.
             </h2>
           </div>
 
@@ -85,7 +89,7 @@ export default function AboutSection() {
                 fontWeight: 300,
               }}
             >
-              Founded in 2014, it currently has a team of over 60 professionals across its three offices in Madrid, London, and Frankfurt, from where it can execute transactions across Europe.
+              You've been right. You knew the market was mispriced. You called it before anyone else did and then watched it resolve exactly the way you said it would. The payout was fine. It should have been life-changing. The problem was never your read. It was the size you could afford to put behind it.
             </p>
             <a href="#" className="tm-link" style={{ width: "fit-content" }}>
               Discover our history

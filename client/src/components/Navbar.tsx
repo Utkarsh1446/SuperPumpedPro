@@ -35,7 +35,7 @@ export default function Navbar() {
         >
           {/* Logo */}
           <a href="#" className="flex-shrink-0 flex items-center" style={{ height: "100%" }}>
-            <SuperPumpedWordmark />
+            <SuperPumpedWordmark scrolled={scrolled} />
           </a>
 
           {/* Desktop Nav */}
@@ -44,7 +44,7 @@ export default function Navbar() {
               <a
                 key={item}
                 href="#"
-                style={{ color: "var(--tm-black)", fontSize: "0.8125rem", fontWeight: 400, letterSpacing: "0.01em" }}
+                style={{ color: scrolled ? "var(--tm-black)" : "#ffffff", fontSize: "0.8125rem", fontWeight: 400, letterSpacing: "0.01em" }}
                 className="transition-colors duration-200 hover:opacity-60"
               >
                 {item}
@@ -58,7 +58,7 @@ export default function Navbar() {
             >
               <button
                 className="flex items-center gap-1.5 transition-opacity duration-200 hover:opacity-60"
-                style={{ color: "var(--tm-black)", fontSize: "0.8125rem", fontWeight: 400, letterSpacing: "0.01em", background: "none", border: "none", cursor: "pointer" }}
+                style={{ color: scrolled ? "var(--tm-black)" : "#ffffff", fontSize: "0.8125rem", fontWeight: 400, letterSpacing: "0.01em", background: "none", border: "none", cursor: "pointer" }}
               >
                 Financial Solutions
                 <svg width="9" height="5" viewBox="0 0 9 5" fill="none" className={`transition-transform duration-200 ${megaMenuOpen ? "rotate-180" : ""}`}>
@@ -74,8 +74,8 @@ export default function Navbar() {
               href="https://private.superpumped.pro"
               className="transition-all duration-200 hover:bg-black hover:text-white"
               style={{
-                color: "var(--tm-black)",
-                border: "1px solid var(--tm-black)",
+                color: scrolled ? "var(--tm-black)" : "#ffffff",
+                border: `1px solid ${scrolled ? "var(--tm-black)" : "#ffffff"}`,
                 padding: "0.4rem 1rem",
                 fontSize: "0.75rem",
                 fontWeight: 500,
@@ -94,9 +94,9 @@ export default function Navbar() {
             style={{ background: "none", border: "none" }}
           >
             <div className="w-5 flex flex-col gap-1.5">
-              <span className={`block h-px transition-all duration-300 ${mobileMenuOpen ? "rotate-45 translate-y-2.5" : ""}`} style={{ backgroundColor: "var(--tm-black)" }} />
-              <span className={`block h-px transition-all duration-300 ${mobileMenuOpen ? "opacity-0" : ""}`} style={{ backgroundColor: "var(--tm-black)" }} />
-              <span className={`block h-px transition-all duration-300 ${mobileMenuOpen ? "-rotate-45 -translate-y-2.5" : ""}`} style={{ backgroundColor: "var(--tm-black)" }} />
+              <span className={`block h-px transition-all duration-300 ${mobileMenuOpen ? "rotate-45 translate-y-2.5" : ""}`} style={{ backgroundColor: scrolled ? "var(--tm-black)" : "#ffffff" }} />
+              <span className={`block h-px transition-all duration-300 ${mobileMenuOpen ? "opacity-0" : ""}`} style={{ backgroundColor: scrolled ? "var(--tm-black)" : "#ffffff" }} />
+              <span className={`block h-px transition-all duration-300 ${mobileMenuOpen ? "-rotate-45 -translate-y-2.5" : ""}`} style={{ backgroundColor: scrolled ? "var(--tm-black)" : "#ffffff" }} />
             </div>
           </button>
         </div>
@@ -174,16 +174,20 @@ export default function Navbar() {
   );
 }
 
-function SuperPumpedWordmark() {
+function SuperPumpedWordmark({ scrolled }: { scrolled: boolean }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-      {/* Icon: three horizontal lines stacked */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "4px", paddingTop: "2px" }}>
-        <div style={{ width: "18px", height: "1.5px", background: "var(--tm-black)" }} />
-        <div style={{ width: "24px", height: "1.5px", background: "var(--tm-black)" }} />
-        <div style={{ width: "14px", height: "1.5px", background: "var(--tm-black)" }} />
-      </div>
-      {/* Wordmark text */}
+      <img
+        src="/assets/superpumped-logo-bw.png"
+        alt=""
+        style={{
+          width: "26px",
+          height: "26px",
+          objectFit: "contain",
+          display: "block",
+          filter: scrolled ? "invert(1)" : "none",
+        }}
+      />
       <span
         style={{
           fontFamily: "'DM Sans', sans-serif",
@@ -191,7 +195,7 @@ function SuperPumpedWordmark() {
           fontSize: "0.875rem",
           letterSpacing: "0.18em",
           textTransform: "uppercase",
-          color: "var(--tm-black)",
+          color: scrolled ? "var(--tm-black)" : "#ffffff",
           lineHeight: 1,
         }}
       >

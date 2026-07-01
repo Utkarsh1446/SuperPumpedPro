@@ -9,7 +9,7 @@ export default function HeroSection() {
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: `url(/manus-storage/Stadium_fe070eff.jpg)`,
+          backgroundImage: `url(/assets/superpumped-hero-stadium.png)`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           filter: "grayscale(100%) contrast(1.1) brightness(0.9)",
