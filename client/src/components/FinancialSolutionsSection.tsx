@@ -94,14 +94,15 @@ export default function FinancialSolutionsSection() {
           <h2
             className="tm-display"
             style={{
-              fontSize: "clamp(2rem, 4vw, 3.5rem)",
+              fontSize: "min(1.35vw, 1.2rem)",
               fontWeight: 300,
-              maxWidth: "700px",
+              maxWidth: "none",
               lineHeight: 1.05,
               color: "var(--tm-black)",
+              whiteSpace: "nowrap",
             }}
           >
-            Our four strategies are service-oriented, providing tailored financing solutions across the entire capital structure
+            Our ecosystem offers one stop solution for all your needs. Curated for Traders by Traders. Let your capital get SuperPumped
           </h2>
         </div>
 
