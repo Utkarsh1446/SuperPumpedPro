@@ -1,49 +1,99 @@
 import { useEffect, useRef } from "react";
 
-const countries = [
-  { name: "Spain", img: "/manus-storage/map_spain_25a014a1.jpg" },
-  { name: "Portugal", img: "/manus-storage/map_portugal_35e8dce6.jpg" },
-  { name: "France", img: "/manus-storage/map_france_7815701d.jpg" },
-  { name: "Italy", img: "/manus-storage/map_italy_f0b1a174.jpg" },
-  { name: "Holland", img: "/manus-storage/map_holland_a518d501.jpg" },
-  { name: "Belgium", img: "/manus-storage/map_belgium_5a36bf7e.jpg" },
-  { name: "Luxembourg", img: "/manus-storage/map_luxembourg_3cca6ac6.jpg" },
-  { name: "Norway", img: "/manus-storage/map_noruega_aad55356.jpg" },
-  { name: "Denmark", img: "/manus-storage/map_dinamarca_43399bce.jpg" },
-  { name: "Sweden", img: "/manus-storage/map_suecia_7f48d306.jpg" },
-  { name: "Finland", img: "/manus-storage/map_finlandia_5ef2d657.jpg" },
-  { name: "Austria", img: "/manus-storage/map_austria_761e3ae9.jpg" },
-  { name: "Germany", img: "/manus-storage/map_germany_867e5c91.jpg" },
-  { name: "Switzerland", img: "/manus-storage/map_suiza_8f6c47e1.jpg" },
-  { name: "United Kingdom", img: "/manus-storage/map_uk_48668537.jpg" },
-  { name: "Ireland", img: "/manus-storage/map_ireland_d8ef628b.jpg" },
+const socialPosts = [
+  {
+    type: "x" as const,
+    url: "https://x.com/0xSehaj/status/1957574810499736021",
+    label: "Post by Sehaj",
+  },
+  {
+    type: "reddit" as const,
+    url: "https://www.reddit.com/r/PredictionMarkets/comments/1t2uv1b/are_there_any_prediction_markets_that_offer/",
+    label: "Are there any prediction markets that offer leverage?",
+  },
+  {
+    type: "reddit" as const,
+    url: "https://www.reddit.com/r/defi/comments/1rz21mh/lending_for_prediction_markets/",
+    label: "Lending for Prediction Markets",
+  },
+  {
+    type: "reddit" as const,
+    url: "https://www.reddit.com/r/Polymarket/comments/1tr5310/leverage_on_polymarket_bots/",
+    label: "Leverage on Polymarket bots?",
+  },
+  {
+    type: "reddit" as const,
+    url: "https://www.reddit.com/r/PredictionMarkets/comments/1tph0rm/genuine_question_does_the_prop_firm_model_make/",
+    label: "Does the prop firm model make sense for prediction markets?",
+  },
+  {
+    type: "x" as const,
+    url: "https://x.com/DWFLabs/status/2054185230173667809",
+    label: "Post by DWF Labs",
+  },
+  {
+    type: "x" as const,
+    url: "https://x.com/iatskar/status/1996990828804296907",
+    label: "Post by iatskar",
+  },
 ];
 
 export default function ExpansionSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
-  const scrollRef = useRef({ position: 0, velocity: 0 });
+  const scrollPositionRef = useRef(0);
+  const isCarouselPausedRef = useRef(false);
+
+  useEffect(() => {
+    const renderTweets = () => {
+      const twitterWindow = window as typeof window & {
+        twttr?: { widgets?: { load: (element?: HTMLElement) => void } };
+      };
+      twitterWindow.twttr?.widgets?.load(carouselRef.current ?? undefined);
+    };
+
+    const existingScript = document.querySelector<HTMLScriptElement>(
+      'script[src="https://platform.x.com/widgets.js"]'
+    );
+
+    if (existingScript) {
+      renderTweets();
+      existingScript.addEventListener("load", renderTweets);
+      return () => existingScript.removeEventListener("load", renderTweets);
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://platform.x.com/widgets.js";
+    script.async = true;
+    script.charset = "utf-8";
+    script.addEventListener("load", renderTweets);
+    document.body.appendChild(script);
+
+    return () => script.removeEventListener("load", renderTweets);
+  }, []);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://embed.reddit.com/widgets.js";
+    script.async = true;
+    script.charset = "utf-8";
+    document.body.appendChild(script);
+  }, []);
 
   useEffect(() => {
     const carousel = carouselRef.current;
     if (!carousel) return;
 
     let animationId: number;
-    const speed = 0.5; // pixels per frame
-
     const animate = () => {
-      scrollRef.current.position += speed;
-      
-      // Get the total width of one full set of cards
-      const cardWidth = 240; // approximate card width
-      const totalWidth = cardWidth * countries.length;
-      
-      // Reset to beginning when we've scrolled past one full set
-      if (scrollRef.current.position > totalWidth) {
-        scrollRef.current.position = 0;
+      if (!isCarouselPausedRef.current) {
+        scrollPositionRef.current += 0.4;
+        const loopWidth = carousel.scrollWidth / 2;
+        if (loopWidth > 0 && scrollPositionRef.current >= loopWidth) {
+          scrollPositionRef.current = 0;
+        }
+        carousel.style.transform = `translateX(-${scrollPositionRef.current}px)`;
       }
-
-      carousel.style.transform = `translateX(-${scrollRef.current.position}px)`;
       animationId = requestAnimationFrame(animate);
     };
 
@@ -162,118 +212,58 @@ export default function ExpansionSection() {
           <div className="fade-in" />
         </div>
 
-        {/* Horizontal infinite carousel */}
+        {/* Social post carousel */}
         <div
           style={{
             overflow: "hidden",
             marginBottom: "3rem",
-            background: "#f8f8f6",
-            padding: "2rem 0",
+            background: "transparent",
+            padding: "1rem 0",
           }}
         >
           <div
             ref={carouselRef}
+            onMouseEnter={() => { isCarouselPausedRef.current = true; }}
+            onMouseLeave={() => { isCarouselPausedRef.current = false; }}
             style={{
               display: "flex",
-              gap: "1rem",
+              gap: "0.4375rem",
+              width: "max-content",
               willChange: "transform",
             }}
           >
-            {/* Duplicate countries array for seamless loop */}
-            {[...countries, ...countries].map((country, i) => (
-              <div
-                key={`${country.name}-${i}`}
+            {[...socialPosts, ...socialPosts].map((post, index) => (
+              <article
+                key={`${post.url}-${index}`}
+                className="social-post-card"
                 style={{
                   flexShrink: 0,
-                  width: "240px",
+                  width: "330px",
+                  height: "440px",
+                  overflowY: "auto",
+                  background: "transparent",
+                  padding: 0,
                   display: "flex",
-                  flexDirection: "column",
-                  gap: "0.75rem",
+                  justifyContent: "center",
+                  alignItems: "flex-start",
                 }}
               >
-                <div
-                  style={{
-                    width: "100%",
-                    aspectRatio: "1",
-                    overflow: "hidden",
-                    background: "#e8e8e6",
-                  }}
-                >
-                  <img
-                    src={country.img}
-                    alt={country.name}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      display: "block",
-                    }}
-                  />
+                <div className="social-embed-scale">
+                  {post.type === "x" ? (
+                    <blockquote className="twitter-tweet" data-dnt="true">
+                      <a href={post.url}>{post.label}</a>
+                    </blockquote>
+                  ) : (
+                    <blockquote className="reddit-embed-bq" data-embed-height="500">
+                      <a href={post.url}>{post.label}</a>
+                    </blockquote>
+                  )}
                 </div>
-                <span
-                  style={{
-                    fontSize: "0.8125rem",
-                    fontWeight: 400,
-                    color: "var(--tm-black)",
-                    textAlign: "center",
-                  }}
-                >
-                  {country.name}
-                </span>
-              </div>
+              </article>
             ))}
           </div>
         </div>
 
-        {/* Static map with office locations */}
-        <div
-          style={{
-            background: "#f8f8f6",
-            padding: "2rem",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            minHeight: "300px",
-            position: "relative",
-          }}
-        >
-          <div
-            style={{
-              position: "relative",
-              width: "100%",
-              maxWidth: "600px",
-              aspectRatio: "16/9",
-              background: "#e8e8e6",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "0.875rem",
-              color: "var(--tm-gray-mid)",
-            }}
-          >
-            {/* Simplified Europe map representation */}
-            <div style={{ textAlign: "center" }}>
-              <div style={{ marginBottom: "1rem", fontSize: "0.75rem", letterSpacing: "0.1em", textTransform: "uppercase" }}>
-                Europe Map
-              </div>
-              <div style={{ display: "flex", gap: "2rem", justifyContent: "center", alignItems: "center" }}>
-                {/* Office location markers */}
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem" }}>
-                  <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "var(--tm-red)" }} />
-                  <span style={{ fontSize: "0.75rem" }}>Madrid</span>
-                </div>
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem" }}>
-                  <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "var(--tm-red)" }} />
-                  <span style={{ fontSize: "0.75rem" }}>London</span>
-                </div>
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem" }}>
-                  <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "var(--tm-red)" }} />
-                  <span style={{ fontSize: "0.75rem" }}>Frankfurt</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );

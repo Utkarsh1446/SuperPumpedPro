@@ -224,6 +224,24 @@
     border-color: var(--tm-red);
   }
 
+  .social-post-card {
+    scrollbar-width: none;
+  }
+
+  .social-post-card::-webkit-scrollbar {
+    display: none;
+  }
+
+  .social-embed-scale {
+    width: 390px;
+    transform: scale(0.77);
+    transform-origin: top center;
+  }
+
+  .social-embed-scale iframe {
+    margin: 0 !important;
+  }
+
   @media (min-width: 640px) {
     .container {
       padding-left: 1.5rem; /* 24px - tablet padding */
