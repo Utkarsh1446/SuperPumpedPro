@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 
 const financialSolutions = [
-  { title: "Private Equity", img: "/manus-storage/menu_pe_88278eeb.jpg", href: "#" },
-  { title: "Direct Lending", img: "/manus-storage/menu_dl_59c6a75c.jpg", href: "#" },
-  { title: "Fund of Funds", img: "/manus-storage/menu_fof_589aa3f2.jpg", href: "#" },
-  { title: "Fund Financing", img: "/manus-storage/menu_ff_192da86e.jpg", href: "#" },
+  { title: "Leverage", img: "/assets/leverage.png", href: "#" },
+  { title: "Earning Vaults", img: "/assets/earning-vaults.png", href: "#" },
+  { title: "Automated Strategies", img: "/assets/automated-strategies.png", href: "#" },
+  { title: "Agentic Markets", img: "/assets/agentic-markets.png", href: "#" },
 ];
 
 export default function Navbar() {
@@ -40,7 +40,7 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8">
-            {["About", "Portfolio", "Team", "Investors", "Contact"].map((item) => (
+            {["About"].map((item) => (
               <a
                 key={item}
                 href="#"
@@ -66,6 +66,16 @@ export default function Navbar() {
                 </svg>
               </button>
             </div>
+            {["Docs", "Contact"].map((item) => (
+              <a
+                key={item}
+                href="#"
+                style={{ color: scrolled ? "var(--tm-black)" : "#ffffff", fontSize: "0.8125rem", fontWeight: 400, letterSpacing: "0.01em" }}
+                className="transition-colors duration-200 hover:opacity-60"
+              >
+                {item}
+              </a>
+            ))}
           </nav>
 
           {/* Right side */}
@@ -150,7 +160,7 @@ export default function Navbar() {
         }}
       >
         <nav className="flex flex-col" style={{ padding: "2rem 2.5rem", gap: "0" }}>
-          {["About", "Financial Solutions", "Portfolio", "Team", "Investors", "Contact"].map((item) => (
+          {["About", "Financial Solutions", "Docs", "Contact"].map((item) => (
             <a
               key={item}
               href="#"

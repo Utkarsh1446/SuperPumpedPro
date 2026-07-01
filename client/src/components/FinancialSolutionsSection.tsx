@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 
 const solutions = [
   {
-    id: "private-equity",
-    title: "Private\nEquity",
+    id: "leverage",
+    title: "Leverage",
     description:
       "Minority stakes in SMEs, with the aim of becoming strategic capital to support professionalization and accelerate growth.",
     stats: [
@@ -11,11 +11,11 @@ const solutions = [
       { label: "EBITDA", value: "€1m ⟷ €25m" },
       { label: "Ticket", value: "€5m ⟷ €35m" },
     ],
-    img: "/manus-storage/pe_12fb5a88.jpg",
+    img: "/assets/leverage.png",
   },
   {
-    id: "direct-lending",
-    title: "Direct\nLending",
+    id: "earning-vaults",
+    title: "Earning\nVaults",
     description:
       "Tailored financing that can combine amortizable tranches (TLA) and non-amortizable tranches to maturity / bullet (TLB) to finance different uses (acquisitions, capex, M&A, dividends, etc.)",
     stats: [
@@ -23,11 +23,11 @@ const solutions = [
       { label: "EBITDA", value: "€2m ⟷ €25m" },
       { label: "Ticket", value: "€5m ⟷ €75m" },
     ],
-    img: "/manus-storage/dl_776055e4.jpg",
+    img: "/assets/earning-vaults.png",
   },
   {
-    id: "fund-of-funds",
-    title: "Fund of\nFunds",
+    id: "automated-strategies",
+    title: "Automated\nStrategies",
     description:
       "We invest in leading Buyout and Growth strategies through a selective portfolio of private equity funds, focusing on supporting experienced strategies and managers with consistent top-quartile performance.",
     stats: [
@@ -35,11 +35,11 @@ const solutions = [
       { label: "Target Segment", value: "Retail" },
       { label: "Strategy", value: "FoF PE & Secondaries" },
     ],
-    img: "/manus-storage/fof_ab40617a.jpg",
+    img: "/assets/automated-strategies.png",
   },
   {
-    id: "fund-financing",
-    title: "Fund\nFinancing",
+    id: "agentic-markets",
+    title: "Agentic\nMarkets",
     description:
       "Tailored financing to meet the liquidity needs of private equity managers and provide operational flexibility.",
     stats: [
@@ -47,7 +47,7 @@ const solutions = [
       { label: "Ticket", value: "€5m ⟷ €50m" },
       { label: "Transactions", value: "+15" },
     ],
-    img: "/manus-storage/ff_7de8677f.jpg",
+    img: "/assets/agentic-markets.png",
   },
 ];
 
