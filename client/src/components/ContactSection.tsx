@@ -1,4 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
+import type { CSSProperties } from "react";
 
 const faqCards = [
   {
@@ -14,6 +15,11 @@ const faqCards = [
       "SuperPumped es la única capa de trading apalancado del mundo creada específicamente para mercados de predicción. Te permite amplificar posiciones con hasta 10x de apalancamiento, operar en privado sin exponer tus movimientos a copy-bots y acceder a la mayor infraestructura de datos de ejecución del sector, creada para traders, instituciones y agentes de IA.",
       "Si alguna vez acertaste en un mercado pero te llevaste solo una fracción de lo que deberías haber ganado, SuperPumped era lo que faltaba.",
     ],
+    zhQuestion: "什么是 SuperPumped？",
+    zhAnswer: [
+      "SuperPumped 是全球唯一专为预测市场打造的杠杆交易层。它让你以最高 10 倍杠杆放大仓位，在不向跟单机器人暴露操作的情况下私密交易，并使用预测市场领域规模最大的执行数据基础设施，服务于普通交易者、机构和 AI 智能体。",
+      "如果你曾经判断正确，却只获得了本应得到回报的一小部分，那么你缺少的正是 SuperPumped。",
+    ],
   },
   {
     id: "how",
@@ -27,6 +33,11 @@ const faqCards = [
     esAnswer: [
       "Tú aportas la convicción. SuperPumped aporta la eficiencia de capital.",
       "Elige cualquier mercado, selecciona tu apalancamiento y abre tu posición mediante ejecución aislada basada en bóvedas. Cada operación es independiente y el riesgo nunca se mezcla entre posiciones. También puedes conectar tus propios agentes de IA —Claude, ChatGPT, Kimi o cualquier sistema propio— a nuestra capa de trading agéntico. Tus estrategias, tus modelos y tus datos siguen siendo tuyos; nosotros aportamos la infraestructura para actuar a escala.",
+    ],
+    zhQuestion: "它如何运作？",
+    zhAnswer: [
+      "你提供判断力，SuperPumped 提供资本效率。",
+      "选择任意市场和杠杆倍数，通过基于金库的隔离执行建立仓位。每笔交易彼此独立，风险不会跨仓位扩散。你还可以通过智能体交易层连接 Claude、ChatGPT、Kimi 或自有系统。策略、模型和数据仍属于你，我们只提供规模化执行所需的基础设施。",
     ],
   },
   {
@@ -44,6 +55,12 @@ const faqCards = [
       "En mercados apalancados estándar hay una comisión fija del 2,5% por operación. En mercados de alta frecuencia de 5 y 15 minutos, el precio depende del uso: $0,20 para 2x, $0,30 para 3x, $0,40 para 4x y $0,50 para 5x, más un 1% de los beneficios cuando ganas.",
       "Si utilizas 5x sobre una posición de $100 y aciertas, un movimiento de $20 se convierte en uno de $100. El coste de entrada de $0,50 y un dólar sobre beneficios apenas se notan.",
     ],
+    zhQuestion: "费用是多少？",
+    zhAnswer: [
+      "远低于你对这种能力的预期。",
+      "标准杠杆市场每笔交易收取固定 2.5% 费用。对于 5 分钟和 15 分钟高频市场，按使用量计费：2 倍杠杆 $0.20、3 倍 $0.30、4 倍 $0.40、5 倍 $0.50，盈利时另收取利润的 1%。",
+      "如果你在 $100 仓位上使用 5 倍杠杆并判断正确，原本 $20 的变动就会成为 $100 的收益。$0.50 的入场成本和一美元的利润费用几乎无需犹豫。",
+    ],
   },
   {
     id: "privacy",
@@ -60,25 +77,33 @@ const faqCards = [
       "El Modo Stealth de SuperPumped utiliza el método Per Trade Wallet (PTWM): cada operación queda aislada en su propio entorno de ejecución y no puede vincularse contigo en cadena mientras está abierta.",
       "Al conectar tus agentes de IA, tus estrategias, modelos y lógica permanecen contigo. SuperPumped nunca entrena con tus datos, almacena la lógica de tus agentes ni comparte patrones de ejecución. Lo que construyes es tuyo.",
     ],
+    zhQuestion: "隐私如何保护？",
+    zhAnswer: [
+      "大多数预测市场平台会实时公开活跃仓位，这意味着跟单机器人可能在你平仓前抢先或复制最佳交易。",
+      "SuperPumped 的隐身模式采用单笔交易钱包方法（PTWM），每笔交易都隔离在独立执行环境中。仓位在交易进行中不会以可追溯到你的方式显示在链上。",
+      "连接自己的 AI 智能体后，策略、模型和交易逻辑仍完全属于你。SuperPumped 不会使用你的数据训练、存储智能体逻辑或在用户间共享执行模式。你构建的一切都属于你。",
+    ],
   },
   {
     id: "contact",
     image: "/assets/faq-contact.png",
     enQuestion: "Contact us",
     esQuestion: "Contáctanos",
+    zhQuestion: "联系我们",
     enAnswer: [],
     esAnswer: [],
+    zhAnswer: [],
   },
 ];
 
 export default function ContactSection() {
-  const { language } = useLanguage();
+  const { pick } = useLanguage();
 
   return (
-    <section id="contact" style={{ background: "#f8f8f6", padding: "8rem 0 0" }}>
-      <div style={{ padding: "0 2.5rem", maxWidth: "1440px", margin: "0 auto" }}>
+    <section id="contact" className="site-section contact-section" style={{ background: "#f8f8f6", padding: "8rem 0 0" }}>
+      <div className="site-shell" style={{ padding: "0 2.5rem", maxWidth: "1440px", margin: "0 auto" }}>
         <h2
-          className="tm-display"
+          className="tm-display motion-reveal"
           style={{
             fontSize: "clamp(2.5rem, 5vw, 4.5rem)",
             fontWeight: 300,
@@ -88,21 +113,23 @@ export default function ContactSection() {
             marginBottom: "5rem",
           }}
         >
-          {language === "es"
-            ? "Todo lo que querías saber para poner tu capital en modo SuperPumped"
-            : "Everything you wanted to know to get SuperPumped"}
+          {pick({
+            en: "Everything you wanted to know to get SuperPumped",
+            es: "Todo lo que querías saber para poner tu capital en modo SuperPumped",
+            zh: "让你全面了解如何开启 SuperPumped",
+          })}
         </h2>
 
         <div className="faq-mosaic">
           {faqCards.map((card, index) => {
-            const question = language === "es" ? card.esQuestion : card.enQuestion;
-            const answer = language === "es" ? card.esAnswer : card.enAnswer;
+            const question = pick({ en: card.enQuestion, es: card.esQuestion, zh: card.zhQuestion });
+            const answer = pick({ en: card.enAnswer, es: card.esAnswer, zh: card.zhAnswer });
             return (
               <article
                 key={card.id}
-                className={`faq-card ${index === 0 ? "faq-card-large" : ""}`}
+                className={`faq-card motion-reveal ${index === 0 ? "faq-card-large" : ""}`}
                 tabIndex={0}
-                style={{ backgroundImage: `url(${card.image})` }}
+                style={{ backgroundImage: `url(${card.image})`, "--motion-delay": `${index * 65}ms` } as CSSProperties}
               >
                 <div className="faq-card-shade" />
                 <h3 className="faq-card-question">{question}</h3>

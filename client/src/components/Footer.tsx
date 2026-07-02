@@ -4,10 +4,12 @@ export default function Footer() {
   const { language, setLanguage } = useLanguage();
   const legalLinks = language === "es"
     ? ["Aviso legal", "Política de privacidad", "Docs"]
-    : ["Legal Notice", "Privacy Policy", "Docs"];
+    : language === "zh"
+      ? ["法律声明", "隐私政策", "文档"]
+      : ["Legal Notice", "Privacy Policy", "Docs"];
 
   return (
-    <footer
+    <footer className="site-footer"
       style={{
         background: "#f8f8f6",
         borderTop: "1px solid var(--tm-gray-border)",
@@ -55,6 +57,15 @@ export default function Footer() {
               style={{ background: "none", border: 0, cursor: "pointer", color: language === "es" ? "var(--tm-black)" : "var(--tm-gray-mid)", fontWeight: language === "es" ? 600 : 400 }}
             >
               ES
+            </button>
+            <span>|</span>
+            <button
+              type="button"
+              onClick={() => setLanguage("zh")}
+              aria-pressed={language === "zh"}
+              style={{ background: "none", border: 0, cursor: "pointer", color: language === "zh" ? "var(--tm-black)" : "var(--tm-gray-mid)", fontWeight: language === "zh" ? 600 : 400 }}
+            >
+              中文
             </button>
           </div>
         </div>

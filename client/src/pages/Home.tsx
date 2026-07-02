@@ -6,8 +6,11 @@ import ExpansionSection from "@/components/ExpansionSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
+import { useRevealOnScroll } from "@/hooks/useRevealOnScroll";
 
 export default function Home() {
+  useRevealOnScroll();
+
   return (
     <div className="min-h-screen" style={{ background: "#ffffff" }}>
       <Navbar />

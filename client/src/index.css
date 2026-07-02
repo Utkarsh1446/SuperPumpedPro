@@ -42,6 +42,306 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* Responsive layout system */
+.site-shell {
+  width: 100%;
+  min-width: 0;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+img,
+iframe {
+  max-width: 100%;
+}
+
+@media (max-width: 1023px) {
+  .site-section {
+    padding-top: 5.5rem !important;
+    padding-bottom: 5.5rem !important;
+  }
+
+  .contact-section {
+    padding-bottom: 0 !important;
+  }
+
+  .site-shell,
+  .navbar-shell {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
+  .hero-content {
+    padding: 0 1.5rem 3.5rem !important;
+  }
+
+  .hero-heading {
+    font-size: clamp(4.25rem, 12vw, 7.5rem) !important;
+  }
+
+  .about-layout {
+    gap: 3rem !important;
+  }
+
+  .solutions-layout {
+    gap: 0 !important;
+  }
+
+  .solution-item {
+    padding: 3.75rem 0 !important;
+  }
+
+  .solution-top {
+    gap: 2rem !important;
+  }
+
+  .solution-media {
+    width: min(34vw, 280px) !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .cookie-banner {
+    padding: 1rem !important;
+    max-height: 72svh;
+    overflow-y: auto;
+  }
+
+  .site-footer {
+    padding: 2.5rem 1rem !important;
+  }
+
+  .site-section {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+
+  .site-shell,
+  .navbar-shell {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .mobile-nav {
+    padding: 1.25rem 1rem 2rem !important;
+  }
+
+  .hero-section,
+  .hero-content {
+    min-height: 100svh !important;
+  }
+
+  .hero-content {
+    padding: 0 1rem 2.75rem !important;
+  }
+
+  .hero-heading {
+    font-size: clamp(3.25rem, 15vw, 5.25rem) !important;
+    line-height: 0.95 !important;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-indent-1 {
+    margin-left: 0.8rem !important;
+  }
+
+  .hero-indent-2 {
+    margin-left: 1.6rem !important;
+  }
+
+  .about-layout {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+    margin-bottom: 3.5rem !important;
+  }
+
+  .about-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .about-stat {
+    padding: 1.75rem 1rem !important;
+    border-bottom: 1px solid var(--tm-gray-border) !important;
+    border-right: none !important;
+  }
+
+  .about-stat:nth-child(odd) {
+    padding-left: 0 !important;
+    border-right: 1px solid var(--tm-gray-border) !important;
+  }
+
+  .about-stat:nth-child(even) {
+    padding-right: 0 !important;
+  }
+
+  .solution-item {
+    padding: 3rem 0 !important;
+  }
+
+  .solution-top {
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+  }
+
+  .solution-media {
+    width: 100% !important;
+  }
+
+  .solution-stats {
+    grid-template-columns: 1fr !important;
+    padding-top: 0 !important;
+  }
+
+  .solution-stat {
+    padding: 1rem 0 !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--tm-gray-border);
+  }
+
+  .solution-stat:last-child {
+    border-bottom: none;
+  }
+
+  .social-post-card {
+    width: min(82vw, 330px) !important;
+    height: 410px !important;
+  }
+
+  .social-embed-scale {
+    transform: scale(0.72);
+  }
+
+  .faq-card-question {
+    padding: 1.25rem;
+  }
+
+  .faq-card-answer {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-heading {
+    font-size: clamp(2.75rem, 14.5vw, 4rem) !important;
+  }
+
+  .about-stats {
+    grid-template-columns: 1fr !important;
+  }
+
+  .about-stat,
+  .about-stat:nth-child(odd),
+  .about-stat:nth-child(even) {
+    padding: 1.5rem 0 !important;
+    border-right: none !important;
+  }
+
+  .social-post-card {
+    width: 88vw !important;
+  }
+
+  .faq-card,
+  .faq-card-large {
+    min-height: 300px !important;
+  }
+}
+
+/* Polymarket-inspired motion language, adapted to the SuperPumped visual system. */
+.motion-reveal {
+  opacity: 0;
+  filter: blur(7px);
+  transform: translate3d(0, 34px, 0) scale(0.988);
+  transition:
+    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.75s ease;
+  transition-delay: var(--motion-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.motion-reveal.is-visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.hero-line {
+  display: block;
+  opacity: 0;
+  animation: hero-line-reveal 1.05s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.hero-line-1 { animation-delay: 0.12s; }
+.hero-line-2 { animation-delay: 0.28s; }
+.hero-line-3 { animation-delay: 0.44s; }
+
+@keyframes hero-line-reveal {
+  from { opacity: 0; transform: translate3d(0, 52px, 0) scale(0.98); filter: blur(9px); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); filter: blur(0); }
+}
+
+.solution-media {
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.65s ease;
+}
+
+.solution-media img {
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease;
+}
+
+.solution-item:hover .solution-media {
+  transform: translateY(-5px);
+  box-shadow: 0 22px 54px rgba(12, 12, 12, 0.14);
+}
+
+.solution-item:hover .solution-media img {
+  transform: scale(1.045);
+  filter: contrast(1.03);
+}
+
+.faq-card {
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.55s ease;
+}
+
+.faq-card:hover,
+.faq-card:focus-within {
+  z-index: 2;
+  transform: translateY(-6px) scale(1.008);
+  box-shadow: 0 24px 64px rgba(13, 13, 13, 0.2);
+}
+
+.tm-link {
+  transition: color 0.25s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), text-shadow 0.4s ease;
+}
+
+.tm-link:hover {
+  transform: translateY(-2px);
+  text-shadow: 0 0 18px rgba(217, 25, 30, 0.28);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-reveal,
+  .motion-reveal.is-visible,
+  .hero-line {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    animation: none;
+    transition: none;
+  }
+
+  .solution-media,
+  .solution-media img,
+  .faq-card,
+  .tm-link {
+    transition: none;
+  }
+}
+
 :root {
   --primary: var(--color-blue-700);
   --primary-foreground: var(--color-blue-50);

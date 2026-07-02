@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const solutions = [
@@ -6,12 +6,14 @@ const solutions = [
     id: "leverage",
     enTitle: "Leverage",
     esTitle: "Apalancamiento",
+    zhTitle: "杠杆交易",
     enDescription: "Amplify high-conviction prediction-market positions with up to 10x leverage through isolated execution, so every trade has its own defined risk boundary.",
     esDescription: "Amplifica posiciones de alta convicción en mercados de predicción con hasta 10x de apalancamiento mediante ejecución aislada, para que cada operación tenga su propio límite de riesgo.",
+    zhDescription: "通过隔离执行，将高信念的预测市场仓位放大至最高 10 倍杠杆，让每笔交易都拥有清晰、独立的风险边界。",
     stats: [
-      { en: "Maximum", es: "Máximo", enValue: "10x", esValue: "10x" },
-      { en: "Execution", es: "Ejecución", enValue: "Isolated", esValue: "Aislada" },
-      { en: "Markets", es: "Mercados", enValue: "Prediction", esValue: "Predicción" },
+      { en: "Maximum", es: "Máximo", zh: "最高", enValue: "10x", esValue: "10x", zhValue: "10x" },
+      { en: "Execution", es: "Ejecución", zh: "执行", enValue: "Isolated", esValue: "Aislada", zhValue: "隔离" },
+      { en: "Markets", es: "Mercados", zh: "市场", enValue: "Prediction", esValue: "Predicción", zhValue: "预测市场" },
     ],
     img: "/assets/leverage.png",
   },
@@ -19,12 +21,14 @@ const solutions = [
     id: "earning-vaults",
     enTitle: "Earning\nVaults",
     esTitle: "Bóvedas de\nRendimiento",
+    zhTitle: "收益\n金库",
     enDescription: "Put idle capital to work in structured vaults designed to support leveraged prediction-market liquidity while keeping strategies and risk pools clearly separated.",
     esDescription: "Pon el capital inactivo a trabajar en bóvedas estructuradas que respaldan la liquidez apalancada de mercados de predicción, manteniendo estrategias y riesgos claramente separados.",
+    zhDescription: "让闲置资本进入结构化收益金库，为杠杆预测市场提供流动性，同时清晰隔离不同策略与风险池。",
     stats: [
-      { en: "Yield", es: "Rendimiento", enValue: "Automated", esValue: "Automatizado" },
-      { en: "Access", es: "Acceso", enValue: "On-demand", esValue: "Bajo demanda" },
-      { en: "Risk", es: "Riesgo", enValue: "Vault-isolated", esValue: "Aislado" },
+      { en: "Yield", es: "Rendimiento", zh: "收益", enValue: "Automated", esValue: "Automatizado", zhValue: "自动化" },
+      { en: "Access", es: "Acceso", zh: "访问", enValue: "On-demand", esValue: "Bajo demanda", zhValue: "按需" },
+      { en: "Risk", es: "Riesgo", zh: "风险", enValue: "Vault-isolated", esValue: "Aislado", zhValue: "金库隔离" },
     ],
     img: "/assets/earning-vaults.png",
   },
@@ -32,12 +36,14 @@ const solutions = [
     id: "automated-strategies",
     enTitle: "Automated\nStrategies",
     esTitle: "Estrategias\nAutomatizadas",
+    zhTitle: "自动化\n策略",
     enDescription: "Deploy rules-based strategies that monitor markets, size opportunities, and execute around the clock—without surrendering ownership of your models or trading logic.",
     esDescription: "Despliega estrategias basadas en reglas que supervisan mercados, dimensionan oportunidades y ejecutan sin descanso, sin ceder la propiedad de tus modelos ni de tu lógica de trading.",
+    zhDescription: "部署基于规则的策略，全天候监控市场、评估机会并执行交易，同时保留对模型与交易逻辑的完整所有权。",
     stats: [
-      { en: "Operation", es: "Operación", enValue: "24/7", esValue: "24/7" },
-      { en: "Control", es: "Control", enValue: "Rules-based", esValue: "Por reglas" },
-      { en: "Status", es: "Estado", enValue: "Coming soon", esValue: "Próximamente" },
+      { en: "Operation", es: "Operación", zh: "运行", enValue: "24/7", esValue: "24/7", zhValue: "全天候" },
+      { en: "Control", es: "Control", zh: "控制", enValue: "Rules-based", esValue: "Por reglas", zhValue: "规则驱动" },
+      { en: "Status", es: "Estado", zh: "状态", enValue: "Coming soon", esValue: "Próximamente", zhValue: "即将推出" },
     ],
     img: "/assets/automated-strategies.png",
   },
@@ -45,19 +51,21 @@ const solutions = [
     id: "agentic-markets",
     enTitle: "Agentic\nMarkets",
     esTitle: "Mercados\nAgénticos",
+    zhTitle: "智能体\n市场",
     enDescription: "Connect Claude, ChatGPT, Kimi, or your own agents to private execution infrastructure built for researching, deciding, and acting across prediction markets at scale.",
     esDescription: "Conecta Claude, ChatGPT, Kimi o tus propios agentes a una infraestructura de ejecución privada diseñada para investigar, decidir y actuar a escala en mercados de predicción.",
+    zhDescription: "将 Claude、ChatGPT、Kimi 或自有智能体连接至私密执行基础设施，在预测市场中规模化完成研究、决策与行动。",
     stats: [
-      { en: "Agents", es: "Agentes", enValue: "Bring your own", esValue: "Usa los tuyos" },
-      { en: "Data", es: "Datos", enValue: "Private", esValue: "Privados" },
-      { en: "Status", es: "Estado", enValue: "Coming soon", esValue: "Próximamente" },
+      { en: "Agents", es: "Agentes", zh: "智能体", enValue: "Bring your own", esValue: "Usa los tuyos", zhValue: "自带智能体" },
+      { en: "Data", es: "Datos", zh: "数据", enValue: "Private", esValue: "Privados", zhValue: "私密" },
+      { en: "Status", es: "Estado", zh: "状态", enValue: "Coming soon", esValue: "Próximamente", zhValue: "即将推出" },
     ],
     img: "/assets/agentic-markets.png",
   },
 ];
 
 export default function FinancialSolutionsSection() {
-  const { language } = useLanguage();
+  const { pick } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -86,16 +94,17 @@ export default function FinancialSolutionsSection() {
     <section
       id="financial-solutions"
       ref={sectionRef}
+      className="site-section solutions-section"
       style={{ background: "#ffffff", padding: "8rem 0" }}
     >
-      <div style={{ padding: "0 2.5rem", maxWidth: "1440px", margin: "0 auto" }}>
+      <div className="site-shell" style={{ padding: "0 2.5rem", maxWidth: "1440px", margin: "0 auto" }}>
         {/* Section header */}
-        <div style={{ marginBottom: "5rem" }}>
+        <div className="motion-reveal" style={{ marginBottom: "5rem" }}>
           <div
             className="tm-label"
             style={{ marginBottom: "2rem", color: "var(--tm-gray-mid)" }}
           >
-            {language === "es" ? "Soluciones" : "Solutions"}
+            {pick({ en: "Solutions", es: "Soluciones", zh: "解决方案" })}
           </div>
           <h2
             className="tm-display"
@@ -107,14 +116,16 @@ export default function FinancialSolutionsSection() {
               color: "var(--tm-black)",
             }}
           >
-            {language === "es"
-              ? "Nuestro ecosistema ofrece una solución integral para todas tus necesidades. Creado por traders, para traders. Haz que tu capital se SuperPumped."
-              : "Our ecosystem offers one stop solution for all your needs. Curated for Traders by Traders. Let your capital get SuperPumped"}
+            {pick({
+              en: "Our ecosystem offers one stop solution for all your needs. Curated for Traders by Traders. Let your capital get SuperPumped",
+              es: "Nuestro ecosistema ofrece una solución integral para todas tus necesidades. Creado por traders, para traders. Haz que tu capital se SuperPumped.",
+              zh: "我们的生态系统为你的所有需求提供一站式解决方案。由交易者为交易者精心打造，让你的资本全面 SuperPumped。",
+            })}
           </h2>
         </div>
 
         {/* Sticky scroll layout */}
-        <div style={{ display: "flex", gap: "5rem", alignItems: "flex-start" }}>
+        <div className="solutions-layout" style={{ display: "flex", gap: "5rem", alignItems: "flex-start" }}>
           {/* Left sticky sidebar — strategy titles */}
           <div
             className="hidden lg:block"
@@ -139,7 +150,7 @@ export default function FinancialSolutionsSection() {
                     cursor: "pointer",
                   }}
                 >
-                  {(language === "es" ? s.esTitle : s.enTitle).replace("\n", " ")}
+                  {pick({ en: s.enTitle, es: s.esTitle, zh: s.zhTitle }).replace("\n", " ")}
                 </button>
               ))}
             </div>
@@ -151,18 +162,21 @@ export default function FinancialSolutionsSection() {
               <div
                 key={solution.id}
                 ref={(el) => { itemRefs.current[i] = el; }}
+                className="solution-item motion-reveal"
                 style={{
+                  "--motion-delay": `${i * 70}ms`,
                   display: "flex",
                   flexDirection: "column",
                   gap: "2rem",
                   padding: "5rem 0",
                   borderBottom: i < solutions.length - 1 ? "1px solid var(--tm-gray-border)" : "none",
-                }}
+                } as CSSProperties}
               >
                 {/* Top row: image + title */}
-                <div style={{ display: "flex", gap: "3rem", alignItems: "flex-start" }}>
+                <div className="solution-top" style={{ display: "flex", gap: "3rem", alignItems: "flex-start" }}>
                   {/* Image */}
                   <div
+                    className="solution-media"
                     style={{
                       width: "280px",
                       flexShrink: 0,
@@ -173,7 +187,7 @@ export default function FinancialSolutionsSection() {
                   >
                     <img
                       src={solution.img}
-                      alt={(language === "es" ? solution.esTitle : solution.enTitle).replace("\n", " ")}
+                      alt={pick({ en: solution.enTitle, es: solution.esTitle, zh: solution.zhTitle }).replace("\n", " ")}
                       style={{ width: "100%", height: "100%", objectFit: "cover" }}
                     />
                   </div>
@@ -190,7 +204,7 @@ export default function FinancialSolutionsSection() {
                         whiteSpace: "pre-line",
                       }}
                     >
-                      {language === "es" ? solution.esTitle : solution.enTitle}
+                      {pick({ en: solution.enTitle, es: solution.esTitle, zh: solution.zhTitle })}
                     </h3>
                     <p
                       style={{
@@ -201,22 +215,22 @@ export default function FinancialSolutionsSection() {
                         maxWidth: "460px",
                       }}
                     >
-                      {language === "es" ? solution.esDescription : solution.enDescription}
+                      {pick({ en: solution.enDescription, es: solution.esDescription, zh: solution.zhDescription })}
                     </p>
                     {i < 2 ? (
                       <a href="#" className="tm-link" style={{ width: "fit-content" }}>
-                        {language === "es" ? "Saber más" : "Know more"}
+                        {pick({ en: "Know more", es: "Saber más", zh: "了解更多" })}
                       </a>
                     ) : (
                       <span className="tm-link" style={{ width: "fit-content", cursor: "default" }}>
-                        {language === "es" ? "Próximamente" : "Coming Soon"}
+                        {pick({ en: "Coming Soon", es: "Próximamente", zh: "即将推出" })}
                       </span>
                     )}
                   </div>
                 </div>
 
                 {/* Stats row */}
-                <div
+                <div className="solution-stats"
                   style={{
                     display: "grid",
                     gridTemplateColumns: "repeat(3, 1fr)",
@@ -228,6 +242,7 @@ export default function FinancialSolutionsSection() {
                   {solution.stats.map((stat, si) => (
                     <div
                       key={stat.en}
+                      className="solution-stat"
                       style={{
                         display: "flex",
                         flexDirection: "column",
@@ -246,7 +261,7 @@ export default function FinancialSolutionsSection() {
                           fontWeight: 500,
                         }}
                       >
-                        {language === "es" ? stat.es : stat.en}
+                        {pick({ en: stat.en, es: stat.es, zh: stat.zh })}
                       </span>
                       <span
                         style={{
@@ -256,7 +271,7 @@ export default function FinancialSolutionsSection() {
                           letterSpacing: "-0.01em",
                         }}
                       >
-                        {language === "es" ? stat.esValue : stat.enValue}
+                        {pick({ en: stat.enValue, es: stat.esValue, zh: stat.zhValue })}
                       </span>
                     </div>
                   ))}

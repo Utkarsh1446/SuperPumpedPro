@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function CookieBanner() {
-  const { language } = useLanguage();
+  const { pick } = useLanguage();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function CookieBanner() {
 
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-50"
+      className="cookie-banner fixed bottom-0 left-0 right-0 z-50"
       style={{
         background: "#ffffff",
         borderTop: "1px solid var(--tm-gray-border)",
@@ -58,9 +58,11 @@ export default function CookieBanner() {
               maxWidth: "800px",
             }}
           >
-            {language === "es"
-              ? "Utilizamos cookies propias y de terceros para mejorar nuestros servicios y mostrar publicidad relacionada con tus preferencias mediante el análisis de tus hábitos de navegación. Si continúas navegando, consideramos que aceptas su uso. "
-              : "We use our own and third-party cookies to improve our services and show you advertising related to your preferences by analyzing your browsing habits. If you continue browsing, we consider that you accept their use. "}
+            {pick({
+              en: "We use our own and third-party cookies to improve our services and show content related to your preferences by analyzing your browsing habits. By continuing to browse, you agree to their use. ",
+              es: "Utilizamos cookies propias y de terceros para mejorar nuestros servicios y mostrar contenido relacionado con tus preferencias mediante el análisis de tus hábitos de navegación. Si continúas navegando, consideramos que aceptas su uso. ",
+              zh: "我们使用自有及第三方 Cookie 来改善服务，并通过分析浏览习惯展示与你偏好相关的内容。继续浏览即表示你同意使用这些 Cookie。",
+            })}
             <a
               href="#"
               style={{
@@ -69,7 +71,7 @@ export default function CookieBanner() {
                 fontSize: "0.8125rem",
               }}
             >
-              {language === "es" ? "Política de cookies" : "Cookies Policy"}
+              {pick({ en: "Cookies Policy", es: "Política de cookies", zh: "Cookie 政策" })}
             </a>
           </p>
         </div>
@@ -88,7 +90,7 @@ export default function CookieBanner() {
               cursor: "pointer",
             }}
           >
-            {language === "es" ? "Aceptar todo" : "Accept all"}
+            {pick({ en: "Accept all", es: "Aceptar todo", zh: "全部接受" })}
           </button>
           <button
             onClick={reject}
@@ -104,7 +106,7 @@ export default function CookieBanner() {
               cursor: "pointer",
             }}
           >
-            {language === "es" ? "Rechazar no esenciales" : "Reject non-essential"}
+            {pick({ en: "Reject non-essential", es: "Rechazar no esenciales", zh: "拒绝非必要项" })}
           </button>
           <a
             href="#"
@@ -115,7 +117,7 @@ export default function CookieBanner() {
               letterSpacing: "0.02em",
             }}
           >
-            {language === "es" ? "Gestionar preferencias" : "Manage preferences"}
+            {pick({ en: "Manage preferences", es: "Gestionar preferencias", zh: "管理偏好" })}
           </a>
         </div>
       </div>

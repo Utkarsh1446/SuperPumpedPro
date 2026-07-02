@@ -2,16 +2,16 @@ import { useEffect, useRef } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const stats = [
-  { enNumber: "2026", esNumber: "2026", en: "Foundation Year", es: "Año de fundación" },
-  { enNumber: "True", esNumber: "Sí", en: "Privacy", es: "Privacidad" },
-  { enNumber: "Up to 10x", esNumber: "Hasta 10x", en: "Leverage", es: "Apalancamiento" },
-  { enNumber: "<100ms", esNumber: "<100ms", en: "Latency", es: "Latencia" },
-  { enNumber: "+1000", esNumber: "+1000", en: "Trades", es: "Operaciones" },
-  { enNumber: "True", esNumber: "Sí", en: "Advanced Options", es: "Opciones avanzadas" },
+  { enNumber: "2026", esNumber: "2026", zhNumber: "2026", en: "Foundation Year", es: "Año de fundación", zh: "成立年份" },
+  { enNumber: "True", esNumber: "Sí", zhNumber: "是", en: "Privacy", es: "Privacidad", zh: "隐私保护" },
+  { enNumber: "Up to 10x", esNumber: "Hasta 10x", zhNumber: "最高 10x", en: "Leverage", es: "Apalancamiento", zh: "杠杆" },
+  { enNumber: "<100ms", esNumber: "<100ms", zhNumber: "<100ms", en: "Latency", es: "Latencia", zh: "延迟" },
+  { enNumber: "+1000", esNumber: "+1000", zhNumber: "+1000", en: "Trades", es: "Operaciones", zh: "交易" },
+  { enNumber: "True", esNumber: "Sí", zhNumber: "是", en: "Advanced Options", es: "Opciones avanzadas", zh: "高级功能" },
 ];
 
 export default function AboutSection() {
-  const { language } = useLanguage();
+  const { pick } = useLanguage();
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,19 +34,19 @@ export default function AboutSection() {
   return (
     <section
       ref={sectionRef}
+      className="site-section about-section"
       style={{ background: "#ffffff", padding: "8rem 0 6rem" }}
     >
-      <div style={{ padding: "0 2.5rem", maxWidth: "1440px", margin: "0 auto" }}>
+      <div className="site-shell" style={{ padding: "0 2.5rem", maxWidth: "1440px", margin: "0 auto" }}>
         {/* Label */}
-        <div
-          className="fade-up tm-label"
+        <div className="fade-up tm-label"
           style={{ marginBottom: "3rem", color: "var(--tm-gray-mid)" }}
         >
-          {language === "es" ? "Acerca de SuperPumped" : "About SuperPumped"}
+          {pick({ en: "About SuperPumped", es: "Acerca de SuperPumped", zh: "关于 SuperPumped" })}
         </div>
 
         {/* Two-column layout: heading left, text right */}
-        <div
+        <div className="about-layout"
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
@@ -66,11 +66,11 @@ export default function AboutSection() {
                 letterSpacing: "-0.02em",
               }}
             >
-              {language === "es" ? (
-                <>No te falta convicción.<br />Te falta<br />capital.</>
-              ) : (
-                <>You are not lacking conviction.<br />You are<br />under capitalized.</>
-              )}
+              {pick({
+                en: <>You are not lacking conviction.<br />You are<br />under capitalized.</>,
+                es: <>No te falta convicción.<br />Te falta<br />capital.</>,
+                zh: <>你不缺少判断力。<br />你缺少的是<br />资本效率。</>,
+              })}
             </h2>
           </div>
 
@@ -91,15 +91,17 @@ export default function AboutSection() {
                 fontWeight: 300,
               }}
             >
-              {language === "es"
-                ? "Tenías razón. Sabías que el mercado estaba mal valorado. Lo anticipaste antes que nadie y después viste cómo se resolvía exactamente como dijiste. El beneficio estuvo bien, pero debería haber cambiado tu vida. El problema nunca fue tu lectura, sino el tamaño de la posición que podías permitirte."
-                : "You've been right. You knew the market was mispriced. You called it before anyone else did and then watched it resolve exactly the way you said it would. The payout was fine. It should have been life-changing. The problem was never your read. It was the size you could afford to put behind it."}
+              {pick({
+                en: "You've been right. You knew the market was mispriced. You called it before anyone else did and then watched it resolve exactly the way you said it would. The payout was fine. It should have been life-changing. The problem was never your read. It was the size you could afford to put behind it.",
+                es: "Tenías razón. Sabías que el mercado estaba mal valorado. Lo anticipaste antes que nadie y después viste cómo se resolvía exactamente como dijiste. El beneficio estuvo bien, pero debería haber cambiado tu vida. El problema nunca fue tu lectura, sino el tamaño de la posición que podías permitirte.",
+                zh: "你曾经判断正确，也知道市场定价有误。你比其他人更早看见机会，最终结果也正如你所料。回报不错，但本应改变人生。问题从来不是你的判断，而是你能够投入的仓位规模。",
+              })}
             </p>
           </div>
         </div>
 
         {/* Stats grid */}
-        <div
+        <div className="about-stats"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
@@ -109,7 +111,7 @@ export default function AboutSection() {
           {stats.map((stat, i) => (
             <div
               key={stat.en}
-              className="fade-up"
+              className="fade-up about-stat"
               style={{
                 padding: "2.5rem 0",
                 borderBottom: i < 3 ? "1px solid var(--tm-gray-border)" : "none",
@@ -129,7 +131,7 @@ export default function AboutSection() {
                   marginBottom: "0.5rem",
                 }}
               >
-                {language === "es" ? stat.esNumber : stat.enNumber}
+                {pick({ en: stat.enNumber, es: stat.esNumber, zh: stat.zhNumber })}
               </div>
               <div
                 style={{
@@ -139,7 +141,7 @@ export default function AboutSection() {
                   letterSpacing: "0.02em",
                 }}
               >
-                {language === "es" ? stat.es : stat.en}
+                {pick({ en: stat.en, es: stat.es, zh: stat.zh })}
               </div>
             </div>
           ))}

@@ -40,7 +40,7 @@ const socialPosts = [
 ];
 
 export default function ExpansionSection() {
-  const { language } = useLanguage();
+  const { pick } = useLanguage();
   const sectionRef = useRef<HTMLDivElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
   const scrollPositionRef = useRef(0);
@@ -106,11 +106,12 @@ export default function ExpansionSection() {
   return (
     <section
       ref={sectionRef}
+      className="site-section testimonials-section"
       style={{ background: "#ffffff", padding: "6rem 0" }}
     >
-      <div style={{ padding: "0 2.5rem", maxWidth: "1440px", margin: "0 auto" }}>
+      <div className="site-shell" style={{ padding: "0 2.5rem", maxWidth: "1440px", margin: "0 auto" }}>
         <h2
-          className="tm-display"
+          className="tm-display motion-reveal"
           style={{
             fontSize: "clamp(2rem, 4vw, 3.5rem)",
             fontWeight: 300,
@@ -120,9 +121,7 @@ export default function ExpansionSection() {
             marginBottom: "3rem",
           }}
         >
-          {language === "es"
-            ? "Lo que dicen usuarios reales sobre la necesidad de apalancamiento"
-            : "What real users say about need of leverage"}
+          {pick({ en: "What real users say about need of leverage", es: "Lo que dicen usuarios reales sobre la necesidad de apalancamiento", zh: "真实用户如何看待杠杆需求" })}
         </h2>
 
         {/* Social post carousel */}

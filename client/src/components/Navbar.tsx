@@ -2,17 +2,18 @@ import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const financialSolutions = [
-  { en: "Leverage", es: "Apalancamiento", img: "/assets/leverage.png", href: "#" },
-  { en: "Earning Vaults", es: "Bóvedas de Rendimiento", img: "/assets/earning-vaults.png", href: "#" },
-  { en: "Automated Strategies", es: "Estrategias Automatizadas", img: "/assets/automated-strategies.png", href: "#" },
-  { en: "Agentic Markets", es: "Mercados Agénticos", img: "/assets/agentic-markets.png", href: "#" },
+  { en: "Leverage", es: "Apalancamiento", zh: "杠杆交易", img: "/assets/leverage.png", href: "#" },
+  { en: "Earning Vaults", es: "Bóvedas de Rendimiento", zh: "收益金库", img: "/assets/earning-vaults.png", href: "#" },
+  { en: "Automated Strategies", es: "Estrategias Automatizadas", zh: "自动化策略", img: "/assets/automated-strategies.png", href: "#" },
+  { en: "Agentic Markets", es: "Mercados Agénticos", zh: "智能体市场", img: "/assets/agentic-markets.png", href: "#" },
 ];
 
 export default function Navbar() {
-  const { language } = useLanguage();
+  const { pick } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const solidHeader = scrolled || mobileMenuOpen;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -26,23 +27,23 @@ export default function Navbar() {
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
           height: "64px",
-          backgroundColor: scrolled ? "rgba(255,255,255,0.96)" : "transparent",
-          backdropFilter: scrolled ? "blur(8px)" : "none",
-          boxShadow: scrolled ? "0 1px 0 rgba(0,0,0,0.06)" : "none",
+          backgroundColor: solidHeader ? "rgba(255,255,255,0.96)" : "transparent",
+          backdropFilter: solidHeader ? "blur(8px)" : "none",
+          boxShadow: solidHeader ? "0 1px 0 rgba(0,0,0,0.06)" : "none",
         }}
       >
         <div
-          className="flex items-center justify-between h-full"
+          className="navbar-shell flex items-center justify-between h-full"
           style={{ padding: "0 2.5rem" }}
         >
           {/* Logo */}
           <a href="#" className="flex-shrink-0 flex items-center" style={{ height: "100%" }}>
-            <SuperPumpedWordmark scrolled={scrolled} />
+            <SuperPumpedWordmark scrolled={solidHeader} />
           </a>
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8">
-            {[language === "es" ? "Acerca de" : "About"].map((item) => (
+            {[pick({ en: "About", es: "Acerca de", zh: "关于" })].map((item) => (
               <a
                 key={item}
                 href="#"
@@ -62,13 +63,13 @@ export default function Navbar() {
                 className="flex items-center gap-1.5 transition-opacity duration-200 hover:opacity-60"
                 style={{ color: scrolled ? "var(--tm-black)" : "#ffffff", fontSize: "0.8125rem", fontWeight: 400, letterSpacing: "0.01em", background: "none", border: "none", cursor: "pointer" }}
               >
-                {language === "es" ? "Soluciones" : "Solutions"}
+                {pick({ en: "Solutions", es: "Soluciones", zh: "解决方案" })}
                 <svg width="9" height="5" viewBox="0 0 9 5" fill="none" className={`transition-transform duration-200 ${megaMenuOpen ? "rotate-180" : ""}`}>
                   <path d="M1 1L4.5 4L8 1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </button>
             </div>
-            {["Docs", language === "es" ? "Contacto" : "Contact"].map((item) => (
+            {[pick({ en: "Docs", es: "Docs", zh: "文档" }), pick({ en: "Contact", es: "Contacto", zh: "联系" })].map((item) => (
               <a
                 key={item}
                 href="#"
@@ -94,7 +95,7 @@ export default function Navbar() {
                 letterSpacing: "0.04em",
               }}
             >
-              {language === "es" ? "Abrir app" : "Launch App"}
+              {pick({ en: "Launch App", es: "Abrir app", zh: "启动应用" })}
             </a>
           </div>
 
@@ -102,13 +103,13 @@ export default function Navbar() {
           <button
             className="lg:hidden p-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label={language === "es" ? "Abrir menú" : "Toggle menu"}
+            aria-label={pick({ en: "Toggle menu", es: "Abrir menú", zh: "打开菜单" })}
             style={{ background: "none", border: "none" }}
           >
             <div className="w-5 flex flex-col gap-1.5">
-              <span className={`block h-px transition-all duration-300 ${mobileMenuOpen ? "rotate-45 translate-y-2.5" : ""}`} style={{ backgroundColor: scrolled ? "var(--tm-black)" : "#ffffff" }} />
-              <span className={`block h-px transition-all duration-300 ${mobileMenuOpen ? "opacity-0" : ""}`} style={{ backgroundColor: scrolled ? "var(--tm-black)" : "#ffffff" }} />
-              <span className={`block h-px transition-all duration-300 ${mobileMenuOpen ? "-rotate-45 -translate-y-2.5" : ""}`} style={{ backgroundColor: scrolled ? "var(--tm-black)" : "#ffffff" }} />
+              <span className={`block h-px transition-all duration-300 ${mobileMenuOpen ? "rotate-45 translate-y-2.5" : ""}`} style={{ backgroundColor: solidHeader ? "var(--tm-black)" : "#ffffff" }} />
+              <span className={`block h-px transition-all duration-300 ${mobileMenuOpen ? "opacity-0" : ""}`} style={{ backgroundColor: solidHeader ? "var(--tm-black)" : "#ffffff" }} />
+              <span className={`block h-px transition-all duration-300 ${mobileMenuOpen ? "-rotate-45 -translate-y-2.5" : ""}`} style={{ backgroundColor: solidHeader ? "var(--tm-black)" : "#ffffff" }} />
             </div>
           </button>
         </div>
@@ -138,12 +139,12 @@ export default function Navbar() {
                 <div style={{ aspectRatio: "16/9", overflow: "hidden", background: "#f0f0ee" }}>
                   <img
                     src={item.img}
-                    alt={language === "es" ? item.es : item.en}
+                    alt={pick({ en: item.en, es: item.es, zh: item.zh })}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
                 <span style={{ fontSize: "0.8125rem", fontWeight: 500, color: "var(--tm-black)" }}>
-                  {language === "es" ? item.es : item.en}
+                  {pick({ en: item.en, es: item.es, zh: item.zh })}
                 </span>
               </a>
             ))}
@@ -161,12 +162,12 @@ export default function Navbar() {
           pointerEvents: mobileMenuOpen ? "auto" : "none",
         }}
       >
-        <nav className="flex flex-col" style={{ padding: "2rem 2.5rem", gap: "0" }}>
+        <nav className="mobile-nav flex flex-col" style={{ padding: "2rem 2.5rem", gap: "0" }}>
           {[
-            language === "es" ? "Acerca de" : "About",
-            language === "es" ? "Soluciones" : "Solutions",
-            "Docs",
-            language === "es" ? "Contacto" : "Contact",
+            pick({ en: "About", es: "Acerca de", zh: "关于" }),
+            pick({ en: "Solutions", es: "Soluciones", zh: "解决方案" }),
+            pick({ en: "Docs", es: "Docs", zh: "文档" }),
+            pick({ en: "Contact", es: "Contacto", zh: "联系" }),
           ].map((item) => (
             <a
               key={item}
@@ -183,7 +184,7 @@ export default function Navbar() {
             className="mt-6 text-sm font-medium border text-center py-3"
             style={{ color: "var(--tm-black)", borderColor: "var(--tm-black)" }}
           >
-            {language === "es" ? "Abrir app" : "Launch App"}
+            {pick({ en: "Launch App", es: "Abrir app", zh: "启动应用" })}
           </a>
         </nav>
       </div>

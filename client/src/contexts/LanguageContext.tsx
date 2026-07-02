@@ -1,10 +1,11 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
-export type Language = "en" | "es";
+export type Language = "en" | "es" | "zh";
 
 type LanguageContextValue = {
   language: Language;
   setLanguage: (language: Language) => void;
+  pick: <T,>(values: Record<Language, T>) => T;
 };
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
@@ -12,7 +13,7 @@ const LanguageContext = createContext<LanguageContextValue | null>(null);
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>(() => {
     const saved = localStorage.getItem("superpumped-language");
-    return saved === "es" ? "es" : "en";
+    return saved === "es" || saved === "zh" ? saved : "en";
   });
 
   useEffect(() => {
@@ -20,7 +21,10 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     document.documentElement.lang = language;
   }, [language]);
 
-  const value = useMemo(() => ({ language, setLanguage }), [language]);
+  const value = useMemo(
+    () => ({ language, setLanguage, pick: <T,>(values: Record<Language, T>) => values[language] }),
+    [language]
+  );
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }
